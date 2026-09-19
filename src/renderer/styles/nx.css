@@ -1,0 +1,164 @@
+/* nx.css — NX Cloud UI: presence chip, badge, announcements, chat, lock screen */
+
+/* ---------- presence chip ---------- */
+.nx-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(14, 22, 38, .72);
+  border: 1px solid rgba(94, 234, 212, .22);
+  color: var(--text, #e6eefc);
+  border-radius: 999px; padding: 6px 14px;
+  font: 600 12px/1 "Segoe UI", system-ui, sans-serif; letter-spacing: .3px;
+  cursor: pointer; transition: .18s; position: relative; overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.nx-chip:hover { border-color: rgba(94, 234, 212, .55); transform: translateY(-1px); box-shadow: 0 6px 22px rgba(0, 0, 0, .35); }
+.nx-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399; animation: nx-pulse 2.2s infinite; }
+.nx-chip.offline .nx-chip-dot { background: #64748b; box-shadow: none; animation: none; }
+@keyframes nx-pulse { 50% { opacity: .4; } }
+
+/* ---------- announcements nav badge ---------- */
+#nx-announcements-btn { position: relative; }
+.nx-badge {
+  position: absolute; top: -5px; right: -7px;
+  min-width: 17px; height: 17px; padding: 0 4px;
+  border-radius: 999px; background: #ff3b5c; color: #fff;
+  font: 800 10px/17px "Segoe UI", system-ui, sans-serif; text-align: center;
+  box-shadow: 0 0 0 2px rgba(10, 12, 20, .9), 0 0 14px rgba(255, 59, 92, .8);
+}
+.nx-badge.pop { animation: nx-pop .45s cubic-bezier(.2, 2.2, .4, 1); }
+@keyframes nx-pop { 0% { transform: scale(0); } 60% { transform: scale(1.45); } 100% { transform: scale(1); } }
+
+/* ---------- announcements page ---------- */
+.nx-ann-list { display: flex; flex-direction: column; gap: 14px; max-width: 860px; }
+.nx-ann {
+  --nx-accent: #38e1ff; --nx-banner: #101828;
+  display: flex; gap: 0; border-radius: 16px; overflow: hidden;
+  background: linear-gradient(160deg, var(--nx-banner), rgba(13, 18, 32, .92));
+  border: 1px solid color-mix(in srgb, var(--nx-accent) 24%, transparent);
+  transition: .2s; position: relative;
+}
+.nx-ann:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(0, 0, 0, .4); border-color: color-mix(in srgb, var(--nx-accent) 55%, transparent); }
+.nx-ann.fresh::after {
+  content: 'NEW'; position: absolute; top: 12px; right: -26px; transform: rotate(38deg);
+  background: var(--nx-accent); color: #04121c; font: 800 9.5px/1 "Segoe UI", sans-serif;
+  padding: 4px 30px; letter-spacing: 1.2px;
+}
+.nx-ann-bar { width: 5px; flex: none; background: linear-gradient(180deg, var(--nx-accent), transparent 130%); }
+.nx-ann-main { padding: 16px 20px 15px; flex: 1; min-width: 0; }
+.nx-ann header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.nx-ann h3 { font-size: 16.5px; letter-spacing: .2px; }
+.nx-prio { font: 800 9.5px/1 "Segoe UI", sans-serif; letter-spacing: 1.1px; padding: 4px 9px; border-radius: 6px; }
+.prio-info .nx-prio { background: color-mix(in srgb, var(--nx-accent) 16%, transparent); color: var(--nx-accent); }
+.prio-important .nx-prio { background: rgba(251, 191, 36, .16); color: #fbbf24; }
+.prio-critical .nx-prio { background: rgba(255, 84, 112, .17); color: #ff5470; animation: nx-pulse 1.6s infinite; }
+.nx-pin { font-size: 11px; color: var(--muted, #8ea0bd); }
+.nx-ann-tags { display: flex; gap: 6px; align-items: center; margin: 7px 0 2px; flex-wrap: wrap; }
+.nx-tag { background: color-mix(in srgb, var(--nx-accent) 13%, transparent); border: 1px solid color-mix(in srgb, var(--nx-accent) 34%, transparent); color: var(--nx-accent); font-size: 10.5px; border-radius: 6px; padding: 2px 8px; letter-spacing: .4px; }
+.nx-ann-when { color: var(--muted, #8ea0bd); font-size: 11.5px; margin-left: 4px; }
+.nx-ann-body { color: #c9d6ea; font-size: 13.5px; line-height: 1.65; margin-top: 9px; white-space: pre-wrap; word-break: break-word; }
+
+/* ---------- chat popup ---------- */
+.nx-chat-backdrop { position: fixed; inset: 0; z-index: 9000; background: rgba(3, 6, 12, .66); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; animation: nx-fade .18s; }
+@keyframes nx-fade { from { opacity: 0; } }
+.nx-chat-popup {
+  width: min(880px, 94vw); height: min(620px, 86vh);
+  background: linear-gradient(165deg, #0f1728, #0a0f1c);
+  border: 1px solid rgba(94, 160, 220, .22); border-radius: 20px;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, .6);
+  display: flex; flex-direction: column; overflow: hidden; animation: nx-rise .22s cubic-bezier(.2, 1.4, .4, 1);
+}
+@keyframes nx-rise { from { transform: translateY(18px) scale(.97); opacity: 0; } }
+.nx-chat-head { display: flex; align-items: center; gap: 10px; padding: 16px 20px 13px; border-bottom: 1px solid rgba(94, 160, 220, .14); }
+.nx-chat-head h2 { font-size: 17px; }
+.nx-chat-sub { color: var(--muted, #8ea0bd); font-size: 12px; }
+.nx-chat-body { display: grid; grid-template-columns: 250px 1fr; flex: 1; min-height: 0; }
+.nx-chat-body aside { border-right: 1px solid rgba(94, 160, 220, .12); display: flex; flex-direction: column; min-height: 0; }
+.nx-chat-ops { display: flex; gap: 6px; padding: 12px; flex-wrap: wrap; }
+.nx-chat-list { flex: 1; overflow: auto; padding: 0 10px 12px; }
+.nx-chat-row { padding: 11px 13px; border-radius: 11px; cursor: pointer; margin-bottom: 4px; border: 1px solid transparent; }
+.nx-chat-row:hover { background: rgba(56, 130, 246, .08); }
+.nx-chat-row.active { background: rgba(56, 225, 255, .1); border-color: rgba(56, 225, 255, .25); }
+.nx-chat-row b { display: block; font-size: 13.5px; }
+.nx-chat-row span { color: var(--muted, #8ea0bd); font-size: 11.5px; }
+.nx-chat-body main { display: flex; flex-direction: column; min-height: 0; }
+.nx-chat-messages { flex: 1; overflow: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; }
+.nx-msg { display: flex; gap: 9px; max-width: 78%; }
+.nx-msg.mine { align-self: flex-end; flex-direction: row-reverse; }
+.nx-msg-ava { width: 30px; height: 30px; border-radius: 9px; align-self: flex-end; image-rendering: pixelated; border: 1px solid rgba(94, 160, 220, .3); }
+.nx-msg-bubble { background: rgba(23, 33, 54, .92); border: 1px solid rgba(94, 160, 220, .16); border-radius: 14px 14px 14px 4px; padding: 9px 13px; min-width: 0; }
+.nx-msg.mine .nx-msg-bubble { background: linear-gradient(130deg, rgba(56, 130, 246, .28), rgba(56, 225, 255, .16)); border-radius: 14px 14px 4px 14px; border-color: rgba(56, 225, 255, .3); }
+.nx-msg-name { font-size: 11px; font-weight: 800; color: #38e1ff; margin-bottom: 3px; letter-spacing: .3px; }
+.nx-msg-text { font-size: 13.5px; line-height: 1.5; word-break: break-word; white-space: pre-wrap; }
+.nx-msg-time { font-size: 10px; color: var(--muted, #77879f); margin-top: 4px; }
+.nx-chat-img { max-width: 320px; max-height: 240px; border-radius: 10px; display: block; cursor: zoom-in; border: 1px solid rgba(94, 160, 220, .25); }
+.nx-chat-empty { color: var(--muted, #8ea0bd); text-align: center; margin: auto; font-size: 13px; }
+.nx-chat-foot { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid rgba(94, 160, 220, .14); }
+.nx-chat-input { flex: 1; background: rgba(8, 12, 22, .85); border: 1px solid rgba(94, 160, 220, .25); color: var(--text, #e6eefc); border-radius: 11px; padding: 10px 14px; font: inherit; }
+.nx-chat-input:focus { outline: none; border-color: #38e1ff; box-shadow: 0 0 0 3px rgba(56, 225, 255, .15); }
+.nx-file-chip { display: flex; align-items: center; gap: 10px; background: rgba(8, 12, 22, .8); border: 1px solid rgba(94, 160, 220, .25); border-radius: 10px; padding: 8px 12px; cursor: pointer; transition: .15s; }
+.nx-file-chip:hover { border-color: #38e1ff; }
+.nx-file-ico { font-size: 19px; }
+.nx-file-meta b { display: block; font-size: 12.5px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nx-file-meta span { color: var(--muted, #8ea0bd); font-size: 11px; }
+.nx-file-dl { margin-left: 6px; font: 800 10px/1 "Segoe UI", sans-serif; color: #38e1ff; letter-spacing: .8px; }
+
+/* ---------- lock screen ---------- */
+.nx-lock {
+  position: fixed; inset: 0; z-index: 999998;
+  background: radial-gradient(1000px 500px at 50% -10%, rgba(255, 59, 92, .16), transparent 60%), rgba(4, 6, 11, .985);
+  display: flex; align-items: center; justify-content: center;
+  color: #e6eefc; user-select: none; cursor: not-allowed;
+}
+.nx-lock-scan { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .022) 0 1px, transparent 1px 4px); animation: nx-scan 9s linear infinite; }
+@keyframes nx-scan { to { background-position: 0 400px; } }
+.nx-lock-card { text-align: center; padding: 46px 56px; border-radius: 24px; background: rgba(13, 18, 32, .8); border: 1px solid rgba(255, 59, 92, .3); box-shadow: 0 0 90px rgba(255, 59, 92, .12), 0 40px 120px rgba(0, 0, 0, .6); animation: nx-rise .3s cubic-bezier(.2, 1.4, .4, 1); max-width: 560px; }
+.nx-lock-iconwrap { color: #ff5470; display: inline-block; filter: drop-shadow(0 0 22px rgba(255, 84, 112, .55)); margin-bottom: 14px; }
+.nx-lock-icon .shackle { animation: nx-shackle 2.6s ease-in-out infinite; transform-origin: 12px 10px; }
+@keyframes nx-shackle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+.nx-lock-title { font-size: 30px; font-weight: 900; letter-spacing: 5px; color: #ff5470; text-shadow: 0 0 34px rgba(255, 84, 112, .5); margin-bottom: 10px; }
+.nx-lock-reason { color: #c9d6ea; font-size: 15px; margin-bottom: 14px; }
+.nx-lock-timer { font: 700 14px/1 "Segoe UI", monospace, sans-serif; color: #fbbf24; letter-spacing: 1px; margin-bottom: 14px; min-height: 15px; }
+.nx-lock-uuid { font-family: ui-monospace, Consolas, monospace; font-size: 11px; color: #5f7392; margin-bottom: 14px; }
+.nx-lock-hint { color: var(--muted, #8ea0bd); font-size: 12.5px; line-height: 1.6; max-width: 380px; margin: 0 auto; }
+
+@media (max-width: 720px) {
+  .nx-chat-body { grid-template-columns: 1fr; }
+  .nx-chat-body aside { display: none; }
+}
+
+/* ============ v3.1: admin panel, invites, offline grace ============ */
+.nx-admin-bar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px; margin: 0 0 16px; border-radius: 12px;
+  border: 1px dashed rgba(94, 160, 220, .25); background: rgba(10, 16, 28, .5);
+}
+.nx-admin-bar.open { border-style: solid; border-color: rgba(56, 225, 255, .3); }
+.nx-admin-chip {
+  font: 800 10px/1 "Segoe UI", sans-serif; letter-spacing: 1.4px;
+  background: linear-gradient(135deg, #38e1ff, #7c5cff); color: #04121a;
+  padding: 5px 10px; border-radius: 7px;
+}
+.nx-dev-wrap { display: flex; flex-direction: column; gap: 8px; min-width: 480px; max-height: 55vh; overflow: auto; padding-right: 4px; }
+.nx-dev-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border: 1px solid rgba(94, 160, 220, .16); border-radius: 12px; background: rgba(15, 23, 40, .65);
+}
+.nx-dev-head { width: 36px; height: 36px; border-radius: 10px; image-rendering: pixelated; border: 1px solid rgba(94, 160, 220, .3); flex: none; }
+.nx-dev-info { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.nx-dev-info b { font-size: 13.5px; }
+.nx-dev-info span { color: var(--muted, #8ea0bd); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nx-dev-uuid { font-family: ui-monospace, Consolas, monospace; opacity: .75; }
+.nx-dev-flags { display: flex; gap: 5px; margin-left: auto; flex: none; }
+.nx-flag { font: 800 9px/1 "Segoe UI", sans-serif; letter-spacing: 1px; padding: 4px 8px; border-radius: 6px; }
+.nx-flag.on { background: rgba(52, 211, 153, .14); color: #34d399; }
+.nx-flag.off { background: rgba(100, 116, 139, .16); color: #8ea0bd; }
+.nx-flag.lock { background: rgba(248, 113, 113, .16); color: #f87171; }
+.nx-flag.run { background: rgba(56, 225, 255, .14); color: #38e1ff; }
+.nx-dev-ops { flex: none; }
+.nx-invite-ok { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 11px; background: rgba(52, 211, 153, .08); border: 1px solid rgba(52, 211, 153, .3); }
+.nx-invite-head { width: 34px; height: 34px; border-radius: 9px; image-rendering: pixelated; border: 1px solid rgba(52, 211, 153, .4); }
+.nx-offline-bar {
+  display: flex; align-items: center; gap: 10px; padding: 9px 14px;
+  background: rgba(251, 191, 36, .09); border-bottom: 1px solid rgba(251, 191, 36, .25);
+  color: #fbbf24; font-size: 12px;
+}

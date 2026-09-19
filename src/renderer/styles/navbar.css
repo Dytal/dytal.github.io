@@ -1,0 +1,101 @@
+/* navbar.css — top bar, nav items, dropdown panels (instance / versions) */
+#navbar {
+  height: var(--nav-h); flex: 0 0 var(--nav-h);
+  display: flex; align-items: center; gap: 2px; padding: 0 12px;
+  background: linear-gradient(180deg, #0b0c11, #08090d);
+  border-bottom: 1px solid var(--border);
+  z-index: 300; position: relative;
+}
+.brand { display: flex; align-items: center; margin: 0 10px 0 4px; cursor: pointer; border-radius: 10px; padding: 3px; transition: transform var(--dur) var(--ease); }
+.brand:hover { transform: scale(1.06) rotate(-2deg); }
+.brand svg { display: block; }
+
+.nav-item {
+  position: relative; display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 13px; border-radius: 9px; cursor: pointer;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text); transition: color var(--dur), background var(--dur), transform var(--dur) var(--ease);
+  border: none; background: transparent; white-space: nowrap;
+}
+.nav-item:hover { color: var(--accent-bright); background: var(--accent-soft); }
+.nav-item:active { transform: scale(0.96); }
+.nav-item.active { color: var(--accent-bright); }
+.nav-item.active::after {
+  content: ''; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px;
+  background: var(--accent); border-radius: 2px; box-shadow: 0 0 8px var(--accent-glow);
+}
+.nav-item .caret { transition: transform var(--dur); opacity: 0.7; }
+.nav-item.open .caret { transform: rotate(180deg); }
+.nav-spacer { flex: 1; }
+.nav-right { display: flex; align-items: center; gap: 6px; margin-left: 8px; }
+
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 9px; border: 1px solid transparent;
+  background: transparent; cursor: pointer; color: var(--text);
+  transition: all var(--dur) var(--ease);
+}
+.icon-btn:hover { color: var(--accent-bright); background: var(--accent-soft); border-color: var(--accent-border); transform: translateY(-1px); }
+.icon-btn:active { transform: scale(0.94); }
+.icon-btn svg { width: 19px; height: 19px; }
+
+/* provider cycle button */
+.provider-btn { display: inline-flex; align-items: center; gap: 8px; }
+.provider-btn .logo { width: 20px; height: 20px; display: inline-flex; }
+.provider-btn .logo svg { width: 100%; height: 100%; }
+.provider-swap { display: inline-flex; align-items: center; gap: 8px; animation: popIn 0.35s var(--ease); }
+
+/* ---------- dropdown panels ---------- */
+.dropdown-panel {
+  position: fixed; z-index: 400;
+  background: rgba(14, 16, 22, 0.97); backdrop-filter: blur(14px);
+  border: 1px solid var(--border-2); border-radius: 14px;
+  box-shadow: var(--shadow-2); overflow: hidden;
+  transform-origin: top center;
+  animation: popIn 0.24s var(--ease);
+}
+.dropdown-panel.closing { animation: popIn 0.18s var(--ease) reverse forwards; }
+
+.dd-search { padding: 10px 12px 6px; }
+.dd-search input {
+  width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-2);
+  background: var(--bg-2); color: var(--text); outline: none; font-size: 13px;
+}
+.dd-search input:focus { border-color: var(--accent); }
+
+.dd-tabs { display: flex; gap: 4px; padding: 8px 12px 2px; flex-wrap: wrap; }
+.dd-tab {
+  padding: 5px 12px; font-size: 11.5px; font-weight: 700; border-radius: 99px; cursor: pointer;
+  color: var(--muted); border: 1px solid transparent; transition: all var(--dur);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.dd-tab:hover { color: var(--text); }
+.dd-tab.active { color: var(--accent-bright); background: var(--accent-soft); border-color: var(--accent-border); }
+
+.dd-list { overflow-y: auto; overscroll-behavior: contain; padding: 6px; }
+.dd-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 9px 12px; border-radius: 9px; cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  font-size: 13.5px; font-weight: 500; color: var(--text);
+}
+.dd-item:hover { background: var(--accent-soft); color: var(--accent-bright); transform: translateX(3px); }
+.dd-item.selected { background: var(--accent-soft); color: var(--accent-bright); font-weight: 700; box-shadow: inset 0 0 0 1px var(--accent-border); }
+.dd-item .sub { font-size: 11px; color: var(--faint); font-weight: 400; }
+.dd-item .check { color: var(--accent); opacity: 0; transition: opacity 0.15s; }
+.dd-item.selected .check { opacity: 1; }
+.dd-empty { padding: 18px; text-align: center; color: var(--faint); font-size: 13px; }
+
+/* instance cards inside the instance dropdown */
+.dd-inst { display: flex; flex-direction: column; gap: 2px; }
+.dd-inst-main { display: flex; align-items: center; gap: 10px; }
+.inst-avatar {
+  width: 30px; height: 30px; border-radius: 8px; flex: 0 0 30px;
+  background: linear-gradient(135deg, var(--accent), transparent);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;
+  color: #04120a;
+}
+.dd-inst-meta { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.dd-inst-meta b { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dd-inst-meta span { font-size: 11px; color: var(--faint); }
+.dd-hintbar { padding: 7px 14px; font-size: 11px; color: var(--faint); border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 10px; }

@@ -1,0 +1,21 @@
+/* logs.css — separate logs popup window */
+body.logs-body { background: #07080b; }
+.logs-wrap { display: flex; flex-direction: column; height: 100vh; padding: 14px 16px; gap: 10px; }
+.logs-head { display: flex; align-items: center; gap: 12px; }
+.logs-head h2 { font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 9px; }
+.logs-head .live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px rgba(34,197,94,.8); animation: breathe 1.4s infinite; }
+.logs-filters { display: flex; gap: 6px; margin-left: auto; }
+.logs-console {
+  flex: 1; overflow-y: auto; background: #07080b; border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; font-family: var(--mono); font-size: 12px; line-height: 1.62;
+  user-select: text;
+}
+.logs-console .log-line { white-space: pre-wrap; word-break: break-word; animation: fadeIn 0.15s; }
+.logs-console .log-line .t { color: var(--faint); margin-right: 8px; font-size: 10.5px; }
+.logs-console .log-line.info { color: #93c5fd; }
+.logs-console .log-line.warn { color: #fbbf24; }
+.logs-console .log-line.error { color: #f87171; }
+.logs-console .log-line.game { color: #b6bcc8; }
+.logs-console .log-line.download { color: #86efac; }
+.logs-console .log-line.debug { color: #6b7280; }
+.logs-foot { display: flex; justify-content: space-between; font-size: 11px; color: var(--faint); align-items: center; }

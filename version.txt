@@ -1,0 +1,26 @@
+==============================================================
+  NEURAX LAUNCHER - VERSION FILE
+==============================================================
+
+Application name ........ Neurax Launcher
+Version ................. 1.0.0
+Release channel ......... Stable
+Platform ................ Windows x64 (Electron desktop app)
+Owner ................... Anish Sandeep Bhargav
+Minecraft username ...... Dytalmc
+
+Copyright (c) 2026 Anish Sandeep Bhargav. All rights reserved.
+
+--------------------------------------------------------------
+OWNERSHIP AND ACCESS
+--------------------------------------------------------------
+Neurax Launcher is the sole property of Anish Sandeep Bhargav.
+
+No person, group, company or other entity other than the owner
+has any access, administrative rights, control, or ownership
+over this launcher or any part of its code, data or services.
+
+Unauthorized access, copying, modification, redistribution or
+reverse engineering of this launcher is strictly prohibited.
+
+All rights reserved.

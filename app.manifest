@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  NEURAX LAUNCHER - WINDOWS APPLICATION MANIFEST
+  ============================================================
+  Application ........ Neurax Launcher
+  Version ............ 1.0.0  (assembly version 1.0.0.0)
+  Channel ............ stable
+  Platform ........... Windows x64 (Electron desktop app)
+
+  Owner .............. Anish Sandeep Bhargav
+  Minecraft username . Dytalmc
+  Role ............... Sole Owner, Developer and Administrator
+  Access model ....... SINGLE_OWNER: no other person, group,
+                       company or entity has access,
+                       administrative rights, control or
+                       ownership over this launcher.
+  Copyright .......... (c) 2026 Anish Sandeep Bhargav.
+                       All rights reserved.
+
+  ABOUT THIS FILE
+  This is a standard Windows side-by-side application
+  manifest (XML). Windows consumes it when it is embedded
+  into the executable (electron-builder / mt.exe) or when it
+  is shipped as "Neurax Launcher.exe.manifest" next to the
+  exe. Everything below is schema-valid for mt.exe and the
+  Windows loader.
+  ============================================================
+-->
+<asmv1:assembly
+    manifestVersion="1.0"
+    xmlns="urn:schemas-microsoft-com:asm.v1"
+    xmlns:asmv1="urn:schemas-microsoft-com:asm.v1"
+    xmlns:asmv2="urn:schemas-microsoft-com:asm.v2"
+    xmlns:asmv3="urn:schemas-microsoft-com:asm.v3">
+
+  <!-- ====================== IDENTITY ======================== -->
+  <!-- Four-part version is required by the Windows loader.    -->
+  <assemblyIdentity
+      type="win32"
+      name="Neurax.Launcher"
+      version="1.0.0.0"
+      processorArchitecture="*" />
+
+  <description>Neurax Launcher - a real Minecraft launcher, instance manager and server manager. Sole property of Anish Sandeep Bhargav (Minecraft username: Dytalmc). All rights reserved. Unauthorized access, modification or redistribution is prohibited.</description>
+
+  <!-- ================= COMMON CONTROLS v6 =================== -->
+  <!-- Opt in to visual styles / ComCtl32 version 6.           -->
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity
+          type="win32"
+          name="Microsoft.Windows.Common-Controls"
+          version="6.0.0.0"
+          processorArchitecture="*"
+          publicKeyToken="6595b64144ccf1df"
+          language="*" />
+    </dependentAssembly>
+  </dependency>
+
+  <!-- ================== UAC / ELEVATION ===================== -->
+  <!-- asInvoker: the launcher always runs as the invoking     -->
+  <!-- user and never elevates itself. Only the owner's        -->
+  <!-- Windows account decides what it may touch.              -->
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <!-- =================== OS SUPPORT ========================= -->
+  <!-- Declares every Windows version this app targets, so the -->
+  <!-- OS reports its real version number to the process.      -->
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Windows Vista -->
+      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />
+      <!-- Windows 7 -->
+      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />
+      <!-- Windows 8 -->
+      <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />
+      <!-- Windows 8.1 -->
+      <supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />
+      <!-- Windows 10 and Windows 11 -->
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+
+  <!-- =============== WINDOWS RUNTIME SETTINGS =============== -->
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <!-- Per-Monitor v2 DPI awareness (Windows 10 1703+);    -->
+      <!-- older Windows falls back to the dpiAware line.      -->
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/PM</dpiAware>
+      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2, PerMonitor</dpiAwareness>
+      <!-- Support paths longer than 260 characters (Windows   -->
+      <!-- 10 1607+ with the LongPathsEnabled policy on).      -->
+      <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+      <!-- Use UTF-8 as the process ANSI code page (Windows    -->
+      <!-- 10 1903+) so file and console APIs match Node.js.   -->
+      <activeCodePage xmlns="http://schemas.microsoft.com/SMI/2019/WindowsSettings">UTF-8</activeCodePage>
+    </windowsSettings>
+  </application>
+
+</asmv1:assembly>
