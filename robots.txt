@@ -13,4 +13,4 @@ User-agent: Bingbot
 Allow: /
 
 # Sitemap
-Sitemap: https://dytalmc.github.io/sitemap.xml
+Sitemap: https://dytal.github.io/sitemap.xml
