@@ -17,9 +17,9 @@ description: >-
   Windows 10 and 11: every Mojang version, Fabric / Forge / NeoForge /
   Quilt support, built-in Modrinth, a real server manager,
   one-click Microsoft login and automatic Java setup.
-url: "https://dytalmc.github.io"
+url: "https://dytal.github.io"
 baseurl: ""
-repository: "Dytalmc/dytalmc.github.io"
+repository: "Dytal/dytal.github.io"
 lang: en
 locale: en_US
 
