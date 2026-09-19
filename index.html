@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- ==================== PRIMARY SEO ==================== -->
+  <title>NeuraX Launcher — Free Open-Source Minecraft Launcher for Windows</title>
+  <meta name="description" content="Download NeuraX Launcher v1.0.0 — a free, open-source Minecraft launcher for Windows 10 &amp; 11. Every Minecraft version, Fabric / Forge / NeoForge / Quilt, built-in Modrinth, a real server manager and more.">
+  <meta name="keywords" content="minecraft launcher, free minecraft launcher, open source minecraft launcher, neuraX launcher, neurax, dytalmc, best minecraft launcher, minecraft launcher download, fabric launcher, forge launcher, neoforge launcher, quilt launcher, modrinth mods, minecraft server manager, minecraft instances, minecraft launcher windows 10, minecraft launcher windows 11, minecraft 1.0.0 launcher, anish sandeep bhargav">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="author" content="Anish Sandeep Bhargav (Dytalmc)">
+  <meta name="publisher" content="Anish Sandeep Bhargav (Dytalmc)">
+  <meta name="copyright" content="© 2026 Anish Sandeep Bhargav. All rights reserved.">
+  <meta name="rating" content="general">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="reply-to" content="no-reply@dytalmc.github.io">
+
+  <link rel="canonical" href="https://dytalmc.github.io/">
+  <link rel="alternate" hreflang="en" href="https://dytalmc.github.io/">
+  <link rel="alternate" hreflang="x-default" href="https://dytalmc.github.io/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+  <!-- Google Search Console: after verifying https://dytalmc.github.io/ paste your
+       <meta name="google-site-verification" content="TOKEN"> tag on the line below. -->
+
+  <!-- ==================== ICONS & APP META ==================== -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="mask-icon" href="assets/favicon.svg" color="#34d399">
+  <meta name="theme-color" content="#070b10">
+  <meta name="application-name" content="NeuraX Launcher">
+  <meta name="apple-mobile-webapp-title" content="NeuraX Launcher">
+  <meta name="apple-mobile-webapp-capable" content="yes">
+  <meta name="apple-mobile-webapp-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-TileColor" content="#070b10">
+
+  <!-- ==================== OPEN GRAPH (Facebook / Discord / WhatsApp) ==================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NeuraX Launcher">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dytalmc.github.io/">
+  <meta property="og:title" content="NeuraX Launcher — Free Open-Source Minecraft Launcher for Windows">
+  <meta property="og:description" content="Every Minecraft version. Fabric, Forge, NeoForge &amp; Quilt. Built-in Modrinth. A real server manager. Free, open source, no telemetry. Download v1.0.0 for Windows.">
+  <meta property="og:image" content="https://dytalmc.github.io/screenshots/dashboard.jpeg">
+  <meta property="og:image:alt" content="The NeuraX Launcher home dashboard with the big PLAY button">
+  <meta property="og:image:type" content="image/jpeg">
+
+  <!-- ==================== TWITTER / X CARD ==================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NeuraX Launcher — Free Open-Source Minecraft Launcher">
+  <meta name="twitter:description" content="Every Minecraft version, mod loaders, Modrinth built in, server manager. Free &amp; open source for Windows 10/11.">
+  <meta name="twitter:image" content="https://dytalmc.github.io/screenshots/dashboard.jpeg">
+  <meta name="twitter:image:alt" content="The NeuraX Launcher home dashboard">
+
+  <!-- ==================== FONTS & STYLES ==================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="NeuraX Launcher home">
+        <svg class="brand-mark" viewBox="0 0 64 64" width="34" height="34" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="nxg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#34d399"/>
+              <stop offset="1" stop-color="#22d3ee"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="rgba(52,211,153,0.08)" stroke="url(#nxg)" stroke-width="2"/>
+          <path d="M18 46V18h7l14 19V18h7v28h-7L25 27v19z" fill="url(#nxg)"/>
+        </svg>
+        <span class="brand-name">Neura<em>X</em> Launcher</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="#features">Features</a></li>
+        <li><a class="nav-link" href="#screenshots">Screenshots</a></li>
+        <li><a class="nav-link" href="#install">Install</a></li>
+        <li><a class="nav-link" href="#faq">FAQ</a></li>
+        <li><a class="nav-link" href="#opensource">Open Source</a></li>
+        <li>
+          <a class="btn btn-ghost nav-github" href="https://github.com/Dytalmc/dytalmc.github.io" target="_blank" rel="noopener" aria-label="NeuraX Launcher on GitHub (opens in a new tab)">
+            <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </li>
+        <li><a class="btn btn-primary nav-download" href="#download">Download</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="hero-badge reveal">
+          <span class="pill pill-version">v1.0.0</span>
+          <span class="pill">Open Source</span>
+          <span class="pill">MIT License</span>
+          <span class="pill">No telemetry</span>
+        </p>
+        <h1 class="hero-title reveal" id="hero-title">
+          The real Minecraft launcher,<br>
+          <span class="grad">built by a player</span> — for players.
+        </h1>
+        <p class="hero-sub reveal">
+          <strong>NeuraX Launcher</strong> plays every Minecraft version ever released, installs
+          Fabric, Forge, NeoForge and Quilt for you, has the whole Modrinth catalogue built in,
+          and runs real Minecraft servers with a live console — all in one clean, free,
+          open-source app for Windows 10 &amp; 11.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary btn-lg" href="https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe" rel="noopener" download>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3v10.586l-3.293-3.293-1.414 1.414L12 16.414l4.707-4.707-1.414-1.414L12 13.586V3zM5 19h14v2H5z"/></svg>
+            Download NeuraX 1.0.0 — Free .exe
+          </a>
+          <a class="btn btn-ghost btn-lg" href="https://github.com/Dytalmc/dytalmc.github.io" target="_blank" rel="noopener">
+            ★ Star it on GitHub
+          </a>
+        </div>
+        <ul class="hero-facts reveal" aria-label="Quick facts">
+          <li>✔ Every Mojang version — releases, snapshots, Beta &amp; Alpha</li>
+          <li>✔ Fabric · Forge · NeoForge · Quilt, installed automatically</li>
+          <li>✔ Modrinth mods, resource packs, shaders &amp; modpacks built in</li>
+          <li>✔ Real servers: Paper, Spigot, Forge, NeoForge &amp; more</li>
+        </ul>
+        <figure class="hero-shot reveal">
+          <img src="screenshots/dashboard.jpeg" alt="NeuraX Launcher home dashboard showing the big PLAY button, instance selector and navbar" loading="eager" decoding="async">
+          <figcaption>The NeuraX home dashboard — one click and you are in the game.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ==================== FEATURES ==================== -->
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Everything is real</p>
+          <h2 class="section-title" id="features-title">One launcher. <span class="grad">Every feature you actually need.</span></h2>
+          <p class="section-sub">No simulations, no fake progress bars — real Mojang manifests, real official installers, real APIs. Here is what ships in v1.0.0.</p>
+        </header>
+
+        <div class="grid features-grid">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🎮</div>
+            <h3>One-Click Play</h3>
+            <p>A big PLAY button plays the selected instance — or any base version you picked. Worlds, libraries, assets and saves live in one shared global <code>.minecraft</code> folder.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">📜</div>
+            <h3>Every Version Ever</h3>
+            <p>Releases, Snapshots, Beta and Alpha — the full Mojang manifest, searchable and grouped. New Minecraft versions appear automatically on startup.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🧩</div>
+            <h3>All Mod Loaders</h3>
+            <p>Vanilla, Fabric, Forge, NeoForge and Quilt instances. Forge and NeoForge install through their official installers and launch with a fully merged version JSON.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🗂️</div>
+            <h3>Instance Manager</h3>
+            <p>Create instances with name, version, loader, loader version and memory. Each instance gets its own worlds, mods and resource packs. Click to select, double-click to edit.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🛒</div>
+            <h3>Modrinth, Built In</h3>
+            <p>A full storefront mirroring modrinth.com — search with filters, project pages, galleries, and installs of any file version of mods, resource packs, shaders and <code>.mrpack</code> modpacks. No API key needed.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🖥️</div>
+            <h3>Real Server Manager</h3>
+            <p>Paper, Vanilla, Fabric, Forge, NeoForge, Quilt and Spigot servers with start/stop, a live console for commands, a file inspector and an NBT explorer for <code>level.dat</code>.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🔐</div>
+            <h3>One-Click Microsoft Login</h3>
+            <p>A device code appears, your browser opens, you type the code — done (XBL → XSTS → Minecraft services). Offline mode included; tokens are encrypted with Windows DPAPI.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">☕</div>
+            <h3>Zero-Setup Java</h3>
+            <p>NeuraX detects every common Java install — and if none fits, it downloads the correct Temurin runtime (Java 8 / 16 / 17 / 21 / 25) for your Minecraft version automatically.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">☁️</div>
+            <h3>NX Cloud (Optional)</h3>
+            <p>Connect your own Supabase database for an in-launcher ANNOUNCEMENTS tab with a 1-minute auto refresher, cloud chat, invites and 3D skin heads — with offline grace when the cloud is away.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">🎨</div>
+            <h3>Beautiful &amp; Quiet</h3>
+            <p>Four instant themes (Emerald, Orange, Purple, Cyan), a separate filterable logs window, smooth animations — and never a terminal window. Every process runs hidden.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== SCREENSHOTS ==================== -->
+    <section class="section section-alt" id="screenshots" aria-labelledby="shots-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">See it before you run it</p>
+          <h2 class="section-title" id="shots-title">Screenshots of <span class="grad">every corner</span> of the launcher</h2>
+          <p class="section-sub">Real captures of NeuraX 1.0.0 — click any image to enlarge. More on the <a class="link" href="https://github.com/Dytalmc/dytalmc.github.io/tree/main/screenshots" target="_blank" rel="noopener">screenshots folder on GitHub</a>.</p>
+        </header>
+
+        <div class="shots-grid">
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: home dashboard">
+            <img src="screenshots/dashboard.jpeg" alt="NeuraX home dashboard with the big PLAY button" loading="lazy" decoding="async">
+            <figcaption>Home dashboard — one-click PLAY</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: versions list">
+            <img src="screenshots/versions.jpeg" alt="Versions list covering every release, snapshot, Beta and Alpha" loading="lazy" decoding="async">
+            <figcaption>Every version ever — releases, snapshots, Beta &amp; Alpha</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: instance manager">
+            <img src="screenshots/instances.jpeg" alt="Instance manager with installed instances" loading="lazy" decoding="async">
+            <figcaption>Instance manager</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: create instance dialog">
+            <img src="screenshots/create_instant.jpeg" alt="Create instance dialog with loader, version and memory options" loading="lazy" decoding="async">
+            <figcaption>Create an instance — vanilla, Fabric, Forge, NeoForge or Quilt</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: server manager">
+            <img src="screenshots/servers.jpeg" alt="Server manager with live console" loading="lazy" decoding="async">
+            <figcaption>Server manager with a live console</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: create server dialog">
+            <img src="screenshots/create_server.jpeg" alt="Create server dialog with type, port, memory and MOTD" loading="lazy" decoding="async">
+            <figcaption>Create a server — Paper, Vanilla, Fabric, Forge, NeoForge, Quilt or Spigot</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: modrinth storefront">
+            <img src="screenshots/modrinth.jpeg" alt="Built-in Modrinth storefront with search and filters" loading="lazy" decoding="async">
+            <figcaption>Modrinth built in — mods, packs, shaders, modpacks</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: announcements tab">
+            <img src="screenshots/announcements.jpeg" alt="NX Cloud announcements tab which auto-refreshes every minute" loading="lazy" decoding="async">
+            <figcaption>NX Cloud announcements — auto-refreshes every minute</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: cloud chat">
+            <img src="screenshots/chatting.jpeg" alt="NX Cloud chat screen" loading="lazy" decoding="async">
+            <figcaption>NX Cloud chat</figcaption>
+          </figure>
+          <figure class="shot reveal" tabindex="0" role="button" aria-label="Enlarge screenshot: logs window">
+            <img src="screenshots/logs.jpeg" alt="Separate logs window with game, launcher and download logs" loading="lazy" decoding="async">
+            <figcaption>Separate logs window</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== INSTALL ==================== -->
+    <section class="section" id="install" aria-labelledby="install-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">Up and running in a minute</p>
+          <h2 class="section-title" id="install-title">How to <span class="grad">install NeuraX</span></h2>
+        </header>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3>Download the .exe</h3>
+            <p>Grab <code>NeuraX-Launcher-1.0.0.exe</code> from the official GitHub release — the only place you should ever download NeuraX from.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3>Run it</h3>
+            <p>Choose installer or portable. SmartScreen may ask on first run because the app is new and open source — click “More info → Run anyway”.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3>Sign in &amp; play</h3>
+            <p>Sign in with Microsoft (or use offline mode), pick or create an instance, hit PLAY. Java installs itself if you need it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+      <div class="container container-narrow">
+        <header class="section-head reveal">
+          <p class="section-kicker">Good to know</p>
+          <h2 class="section-title" id="faq-title">Frequently asked <span class="grad">questions</span></h2>
+        </header>
+
+        <div class="faq-list">
+          <details class="faq reveal" open>
+            <summary>What is NeuraX Launcher?</summary>
+            <div class="faq-body"><p>NeuraX Launcher is a free, open-source Minecraft launcher for Windows. It launches every Minecraft version ever released, installs the Fabric, Forge, NeoForge and Quilt mod loaders for you, includes the Modrinth catalogue, and can create and run real Minecraft servers — all from one clean desktop app.</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Is NeuraX Launcher really free and open source?</summary>
+            <div class="faq-body"><p>Yes. NeuraX Launcher is 100% free — no ads, no accounts, no telemetry — and the full source code is published on GitHub under the MIT license, owned by Anish Sandeep Bhargav (Dytalmc).</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Which Minecraft versions does it support?</summary>
+            <div class="faq-body"><p>Every version Mojang ever published: all releases, all snapshots, plus Beta and Alpha. The version manifest refreshes automatically, so new Minecraft versions show up on their release day without updating the launcher.</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Can I use my Microsoft account?</summary>
+            <div class="faq-body"><p>Yes — one-click Microsoft login: a device code appears in the launcher, your browser opens automatically, you approve, and the launcher completes the login by itself. Offline mode is included too. Login tokens are stored encrypted with Windows DPAPI and never leave your PC.</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Does it work on Windows 10 and Windows 11?</summary>
+            <div class="faq-body"><p>Yes. NeuraX Launcher 1.0.0 targets 64-bit Windows 10 and Windows 11, ships as a windowed .exe with no console windows, and remembers your window size. There is no terminal to fight with, ever.</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Do I need to install Java first?</summary>
+            <div class="faq-body"><p>No. NeuraX auto-detects every common Java installation (Program Files, Adoptium, Corretto, Zulu, BellSoft and more). If nothing suitable is found, it downloads the correct Temurin runtime — Java 8, 16, 17, 21 or 25 depending on your Minecraft version — automatically.</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Can I install mods and modpacks?</summary>
+            <div class="faq-body"><p>Yes — the Modrinth storefront is built right in. Search with filters (type, loader, category, game version), open project pages, and install any specific file version of mods, resource packs, shaders or .mrpack modpacks into any instance, the global folder, or a brand-new instance created right in the install dialog.</p></div>
+          </details>
+          <details class="faq reveal">
+            <summary>Can it run Minecraft servers too?</summary>
+            <div class="faq-body"><p>Yes. Create Paper, Vanilla, Fabric, Forge, NeoForge, Quilt or Spigot servers with name, version, memory, port and MOTD. Start and stop them from the launcher, send commands through the live console, edit files with the auto-saving inspector, and tweak level.dat values in the NBT explorer.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== DOWNLOAD ==================== -->
+    <section class="section" id="download" aria-labelledby="download-title">
+      <div class="container">
+        <div class="download-box reveal">
+          <div class="download-info">
+            <h2 class="section-title" id="download-title">Download <span class="grad">NeuraX Launcher 1.0.0</span></h2>
+            <p class="section-sub">Free forever. Open source under the MIT license. No ads, no accounts, no telemetry — just Minecraft.</p>
+            <ul class="req-list" aria-label="System requirements">
+              <li><strong>OS:</strong> Windows 10 / 11 (64-bit)</li>
+              <li><strong>Disk:</strong> ~200 MB for the launcher + game files</li>
+              <li><strong>Internet:</strong> needed for downloads &amp; Microsoft login</li>
+              <li><strong>Java:</strong> not required — handled automatically</li>
+            </ul>
+            <p class="download-note">Always download NeuraX only from <strong>dytalmc.github.io</strong> or the official GitHub repository — nowhere else.</p>
+          </div>
+          <div class="download-actions">
+            <a class="btn btn-primary btn-xl" href="https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe" rel="noopener" download>
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3v10.586l-3.293-3.293-1.414 1.414L12 16.414l4.707-4.707-1.414-1.414L12 13.586V3zM5 19h14v2H5z"/></svg>
+              Download for Windows — v1.0.0
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/Dytalmc/dytalmc.github.io/releases" target="_blank" rel="noopener">All releases &amp; patch notes</a>
+            <a class="btn btn-ghost" href="https://github.com/Dytalmc/dytalmc.github.io" target="_blank" rel="noopener">Browse the source code</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== OPEN SOURCE ==================== -->
+    <section class="section section-alt" id="opensource" aria-labelledby="oss-title">
+      <div class="container container-narrow">
+        <header class="section-head reveal">
+          <p class="section-kicker">By a player, for players</p>
+          <h2 class="section-title" id="oss-title">Open source, <span class="grad">MIT licensed</span></h2>
+        </header>
+        <div class="oss-body reveal">
+          <p>NeuraX Launcher is an open-source project created and maintained by <strong>Anish Sandeep Bhargav</strong>, known in Minecraft as <strong>Dytalmc</strong>. Every line of the launcher lives in a public GitHub repository — you can read it, learn from it, report issues and contribute. Nothing is hidden, and nothing phones home: the launcher contains no analytics and no tracking of any kind.</p>
+          <p>The project is released under the permissive <strong>MIT License</strong>, and the whole NeuraX ecosystem — launcher, website, releases and screenshots — is hosted openly on GitHub. If you like it, starring the repository is the best way to support it.</p>
+          <div class="oss-links">
+            <a class="btn btn-primary" href="https://github.com/Dytalmc/dytalmc.github.io" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              github.com/Dytalmc/dytalmc.github.io
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/Dytalmc/dytalmc.github.io/blob/main/LICENSE" target="_blank" rel="noopener">Read the MIT License</a>
+            <a class="btn btn-ghost" href="https://github.com/Dytalmc/dytalmc.github.io/blob/main/PRIVACY-POLICY.md" target="_blank" rel="noopener">Privacy policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <p class="brand-name">Neura<em>X</em> Launcher</p>
+        <p class="footer-tag">The real Minecraft launcher — free, open source, and built by <strong>Anish Sandeep Bhargav (Dytalmc)</strong>.</p>
+      </div>
+      <nav class="footer-col" aria-label="Site sections">
+        <h3>Site</h3>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#screenshots">Screenshots</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Project resources">
+        <h3>Project</h3>
+        <ul>
+          <li><a href="https://github.com/Dytalmc/dytalmc.github.io" target="_blank" rel="noopener">GitHub repository</a></li>
+          <li><a href="https://github.com/Dytalmc/dytalmc.github.io/releases" target="_blank" rel="noopener">Releases</a></li>
+          <li><a href="https://github.com/Dytalmc/dytalmc.github.io/tree/main/screenshots" target="_blank" rel="noopener">Screenshots</a></li>
+          <li><a href="https://github.com/Dytalmc/dytalmc.github.io/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+          <li><a href="https://github.com/Dytalmc/dytalmc.github.io/blob/main/PRIVACY-POLICY.md" target="_blank" rel="noopener">Privacy policy</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h3>Download</h3>
+        <p class="footer-tag">Latest: <strong>v1.0.0</strong> — Windows 10 / 11 (64-bit)</p>
+        <a class="btn btn-primary" href="https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe" rel="noopener" download>Get NeuraX 1.0.0</a>
+      </div>
+    </div>
+    <div class="container footer-legal">
+      <p>© <span id="year">2026</span> Anish Sandeep Bhargav (Dytalmc). All rights reserved. NeuraX Launcher is open source under the MIT License.</p>
+      <p>Not affiliated with Mojang Studios, Microsoft or Modrinth. “Minecraft” is a trademark of Mojang Studios.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== SCREENSHOT LIGHTBOX ==================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden>
+    <button class="lb-close" id="lb-close" type="button" aria-label="Close screenshot viewer">×</button>
+    <button class="lb-nav lb-prev" id="lb-prev" type="button" aria-label="Previous screenshot">‹</button>
+    <figure class="lb-figure">
+      <img class="lb-img" id="lb-img" src="" alt="">
+      <figcaption class="lb-cap" id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lb-next" type="button" aria-label="Next screenshot">›</button>
+  </div>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top" hidden>↑</button>
+
+  <!-- ==================== STRUCTURED DATA (schema.org) ==================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://dytalmc.github.io/#person",
+        "name": "Anish Sandeep Bhargav",
+        "alternateName": "Dytalmc",
+        "url": "https://github.com/Dytalmc"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://dytalmc.github.io/#website",
+        "url": "https://dytalmc.github.io/",
+        "name": "NeuraX Launcher",
+        "alternateName": "Neurax Launcher",
+        "inLanguage": "en",
+        "description": "Official website of NeuraX Launcher — a free, open-source Minecraft launcher for Windows.",
+        "publisher": { "@id": "https://dytalmc.github.io/#person" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://dytalmc.github.io/#app",
+        "name": "NeuraX Launcher",
+        "alternateName": "Neurax Launcher",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Windows 10, Windows 11",
+        "softwareVersion": "1.0.0",
+        "datePublished": "2026-09-19",
+        "url": "https://dytalmc.github.io/",
+        "description": "NeuraX Launcher is a free, open-source Minecraft launcher for Windows 10 and 11. It plays every Mojang version (releases, snapshots, Beta, Alpha), installs Fabric, Forge, NeoForge and Quilt automatically, includes a built-in Modrinth storefront for mods, resource packs, shaders and modpacks, manages Minecraft instances, runs real servers (Paper, Vanilla, Fabric, Forge, NeoForge, Quilt, Spigot) with a live console, provides one-click Microsoft login and auto-downloads the correct Java runtime.",
+        "image": "https://dytalmc.github.io/screenshots/dashboard.jpeg",
+        "screenshot": [
+          "https://dytalmc.github.io/screenshots/dashboard.jpeg",
+          "https://dytalmc.github.io/screenshots/versions.jpeg",
+          "https://dytalmc.github.io/screenshots/instances.jpeg",
+          "https://dytalmc.github.io/screenshots/create_instant.jpeg",
+          "https://dytalmc.github.io/screenshots/servers.jpeg",
+          "https://dytalmc.github.io/screenshots/create_server.jpeg",
+          "https://dytalmc.github.io/screenshots/modrinth.jpeg",
+          "https://dytalmc.github.io/screenshots/announcements.jpeg",
+          "https://dytalmc.github.io/screenshots/chatting.jpeg",
+          "https://dytalmc.github.io/screenshots/logs.jpeg"
+        ],
+        "downloadUrl": "https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe",
+        "fileFormat": "application/x-msdownload",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://dytalmc.github.io/#person" },
+        "publisher": { "@id": "https://dytalmc.github.io/#person" },
+        "license": "https://github.com/Dytalmc/dytalmc.github.io/blob/main/LICENSE",
+        "keywords": "minecraft launcher, free minecraft launcher, open source minecraft launcher, modrinth, fabric, forge, neoforge, quilt, minecraft server manager, dytalmc, neurax",
+        "featureList": [
+          "One-click Play for instances and any base version",
+          "Every Mojang version: releases, snapshots, Beta and Alpha with auto-updating manifest",
+          "Mod loaders: vanilla, Fabric, Forge, NeoForge, Quilt via official installers",
+          "Instance manager with per-instance worlds, mods and resource packs",
+          "Built-in Modrinth storefront with filters and any-version installs",
+          "Server manager for Paper, Vanilla, Fabric, Forge, NeoForge, Quilt and Spigot with live console, file inspector and NBT explorer",
+          "One-click Microsoft login plus offline mode with DPAPI-encrypted tokens",
+          "Automatic Java detection and Temurin runtime download (Java 8/16/17/21/25)",
+          "NX Cloud: announcements with 1-minute auto refresh, chat, invites, skin heads, offline grace",
+          "Four UI themes, separate logs window, no terminal windows"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dytalmc.github.io/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://dytalmc.github.io/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is NeuraX Launcher?",
+            "acceptedAnswer": { "@type": "Answer", "text": "NeuraX Launcher is a free, open-source Minecraft launcher for Windows. It launches every Minecraft version ever released, installs the Fabric, Forge, NeoForge and Quilt mod loaders for you, includes the Modrinth catalogue, and can create and run real Minecraft servers — all from one clean desktop app." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is NeuraX Launcher really free and open source?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. NeuraX Launcher is 100% free — no ads, no accounts, no telemetry — and the full source code is published on GitHub under the MIT license, owned by Anish Sandeep Bhargav (Dytalmc)." }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Minecraft versions does it support?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Every version Mojang ever published: all releases, all snapshots, plus Beta and Alpha. The version manifest refreshes automatically, so new Minecraft versions show up on their release day without updating the launcher." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use my Microsoft account?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes — one-click Microsoft login: a device code appears in the launcher, your browser opens automatically, you approve, and the launcher completes the login by itself. Offline mode is included too. Login tokens are stored encrypted with Windows DPAPI and never leave your PC." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it work on Windows 10 and Windows 11?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. NeuraX Launcher 1.0.0 targets 64-bit Windows 10 and Windows 11, ships as a windowed .exe with no console windows, and remembers your window size. There is no terminal to fight with, ever." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to install Java first?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. NeuraX auto-detects every common Java installation (Program Files, Adoptium, Corretto, Zulu, BellSoft and more). If nothing suitable is found, it downloads the correct Temurin runtime — Java 8, 16, 17, 21 or 25 depending on your Minecraft version — automatically." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I install mods and modpacks?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Modrinth storefront is built right in. Search with filters (type, loader, category, game version), open project pages, and install any specific file version of mods, resource packs, shaders or .mrpack modpacks into any instance, the global folder, or a brand-new instance created right in the install dialog." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can it run Minecraft servers too?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Create Paper, Vanilla, Fabric, Forge, NeoForge, Quilt or Spigot servers with name, version, memory, port and MOTD. Start and stop them from the launcher, send commands through the live console, edit files with the auto-saving inspector, and tweak level.dat values in the NBT explorer." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

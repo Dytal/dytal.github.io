@@ -1,0 +1,82 @@
+# ============================================================
+# Jekyll configuration for GitHub Pages — dytalmc.github.io
+# NeuraX Launcher website · owner: Anish Sandeep Bhargav (Dytalmc)
+#
+# The site is plain, hand-written HTML/CSS/JS. Jekyll only copies
+# files — no layouts, no plugins, no generated pages. This keeps
+# the published HTML byte-identical to the source (best for SEO
+# audits) and avoids the jekyll-sitemap plugin overwriting our
+# hand-tuned sitemap.xml.
+# ============================================================
+
+# ---------- Site ----------
+title: "NeuraX Launcher"
+tagline: "The real Minecraft launcher — free and open source"
+description: >-
+  NeuraX Launcher is a free, open-source Minecraft launcher for
+  Windows 10 and 11: every Mojang version, Fabric / Forge / NeoForge /
+  Quilt support, built-in Modrinth, a real server manager,
+  one-click Microsoft login and automatic Java setup.
+url: "https://dytalmc.github.io"
+baseurl: ""
+repository: "Dytalmc/dytalmc.github.io"
+lang: en
+locale: en_US
+
+author:
+  name: "Anish Sandeep Bhargav"
+  alias: "Dytalmc"
+  url: "https://github.com/Dytalmc"
+
+# Canonical download of the launcher (GitHub Releases)
+launcher:
+  version: "1.0.0"
+  download_url: "https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe"
+  repo_url: "https://github.com/Dytalmc/dytalmc.github.io"
+
+# ---------- Build ----------
+permalink: pretty
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# No plugins: our own sitemap.xml / robots.txt / meta tags are used,
+# exactly as written (nothing regenerated or overridden at build time).
+plugins: []
+
+# Do NOT wrap pages in layouts — the HTML is complete as-is.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: null
+
+# ---------- Exclusions ----------
+# Launcher SOURCE CODE lives in this repo next to the website.
+# It must not be copied into the served _site output — it stays
+# browsable on GitHub. Never exclude: css/, js/, assets/,
+# screenshots/ (the site links to those directly).
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - src
+  - scripts
+  - build
+  - package.json
+  - package-lock.json
+  - app.manifest
+  - version.txt
+  - FEATURES.md
+  - PATCH-NOTES.md
+  - PRIVACY-POLICY.md
+  - LICENSE
+  - .gitignore
+  - "*.log"
+
+# ---------- Miscellaneous ----------
+show_dir_listing: false
+compress_html:
+  blanklines: false
