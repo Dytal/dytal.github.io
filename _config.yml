@@ -26,13 +26,13 @@ locale: en_US
 author:
   name: "Anish Sandeep Bhargav"
   alias: "Dytalmc"
-  url: "https://github.com/Dytalmc"
+  url: "https://github.com/Dytal"
 
 # Canonical download of the launcher (GitHub Releases)
 launcher:
   version: "1.0.0"
-  download_url: "https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe"
-  repo_url: "https://github.com/Dytalmc/dytalmc.github.io"
+  download_url: "https://github.com/Dytal/dytal.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe"
+  repo_url: "https://github.com/Dytal/dytal.github.io"
 
 # ---------- Build ----------
 permalink: pretty
