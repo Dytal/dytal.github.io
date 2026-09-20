@@ -1,5 +1,5 @@
 # ============================================================
-# Jekyll configuration for GitHub Pages — dytalmc.github.io
+# Jekyll configuration for GitHub Pages — dytal.github.io
 # NeuraX Launcher website · owner: Anish Sandeep Bhargav (Dytalmc)
 #
 # The site is plain, hand-written HTML/CSS/JS. Jekyll only copies
@@ -17,22 +17,22 @@ description: >-
   Windows 10 and 11: every Mojang version, Fabric / Forge / NeoForge /
   Quilt support, built-in Modrinth, a real server manager,
   one-click Microsoft login and automatic Java setup.
-url: "https://dytalmc.github.io"
+url: "https://dytal.github.io"
 baseurl: ""
-repository: "Dytalmc/dytalmc.github.io"
+repository: "Dytal/dytal.github.io"
 lang: en
 locale: en_US
 
 author:
   name: "Anish Sandeep Bhargav"
   alias: "Dytalmc"
-  url: "https://github.com/Dytalmc"
+  url: "https://github.com/Dytal"
 
 # Canonical download of the launcher (GitHub Releases)
 launcher:
   version: "1.0.0"
-  download_url: "https://github.com/Dytalmc/dytalmc.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe"
-  repo_url: "https://github.com/Dytalmc/dytalmc.github.io"
+  download_url: "https://github.com/Dytal/dytal.github.io/releases/download/v1.0.0/NeuraX-Launcher-1.0.0.exe"
+  repo_url: "https://github.com/Dytal/dytal.github.io"
 
 # ---------- Build ----------
 permalink: pretty

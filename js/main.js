@@ -1,5 +1,5 @@
 /* ============================================================
-   NeuraX Launcher — dytalmc.github.io
+   NeuraX Launcher — dytal.github.io
    Vanilla JS, zero dependencies. Loaded with `defer`.
    ============================================================ */
 (function () {
