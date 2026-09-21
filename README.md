@@ -1,4 +1,4 @@
-# NeuraX Launcher — Website (SEO pack)
+# NeuraX Launcher
 
 The official website of **NeuraX Launcher**, live at **https://dytal.github.io/**.
 Owner & maintainer: **Anish Sandeep Bhargav (Dytalmc)** · fast, MIT licensed.
