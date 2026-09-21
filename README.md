@@ -1,7 +1,7 @@
 # NeuraX Launcher — Website (SEO pack)
 
 The official website of **NeuraX Launcher**, live at **https://dytal.github.io/**.
-Owner & maintainer: **Anish Sandeep Bhargav (Dytalmc)** · Open source, MIT licensed.
+Owner & maintainer: **Anish Sandeep Bhargav (Dytalmc)** · fast, MIT licensed.
 
 ## Files in this pack
 
@@ -18,7 +18,7 @@ Owner & maintainer: **Anish Sandeep Bhargav (Dytalmc)** · Open source, MIT lice
 
 ## Deploy (2 minutes)
 
-1. Extract this archive at the **repository root** of `Dytal/dytal.github.io`
+1. Extract this archive at the **repository root** of `Dytalmc/dytal.github.io`
    (same level as `package.json` / `src/`). It does NOT touch your launcher source,
    and the screenshots folder is already in the repo.
 2. Commit and push to `main`.

@@ -1,0 +1,64 @@
+{
+  "name": "neurax-launcher",
+  "productName": "Neurax Launcher",
+  "version": "1.0.0",
+  "description": "Neurax Launcher 1.0.0 — the release build: adaptive NX boost mod (nx-2.0.0.jar), hardware-aware AUTO memory, stable close-on-launch, owner device grants, Supabase key sync, live invitations (accept/reject), Modrinth Smart Install toggle, resource-pack injection fully removed.",
+  "author": "Anish Sandeep Bharagav",
+  "license": "MIT",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "dist": "electron-builder --win",
+    "dist:portable": "electron-builder --win portable",
+    "dist:all": "electron-builder -mwl",
+    "test:core": "node scripts/test-core.js"
+  },
+  "dependencies": {
+    "extract-zip": "^2.0.1",
+    "minecraft-launcher-core": "^3.18.1"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.neurax.launcher",
+    "productName": "Neurax Launcher",
+    "copyright": "Copyright (c) 2026 Anish Sandeep Bhargav (Dytalmc). All rights reserved.",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Neurax Launcher"
+    },
+    "portable": {
+      "artifactName": "Neurax-Launcher-Portable-${version}.exe"
+    }
+  },
+  "homepage": "https://dytal.github.io"
+}

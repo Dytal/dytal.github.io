@@ -1,0 +1,113 @@
+/* home.css — PLAY page (minimal hero) */
+#page-home { display: flex; align-items: center; justify-content: center; }
+
+.home-hero {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
+.home-hero-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+
+/* ---- vector ornament (pure SVG line-art behind the hero) ---- */
+.orn-wrap {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; z-index: 0;
+  animation: fadeUp 0.8s var(--ease) both;
+}
+.home-ornament {
+  width: min(72vmin, 560px); height: min(72vmin, 560px);
+  opacity: 0.85;
+}
+.home-ornament .ring-a { animation: ornSpin 90s linear infinite; transform-origin: center; transform-box: fill-box; }
+.home-ornament .ring-b { animation: ornSpin 60s linear infinite reverse; transform-origin: center; transform-box: fill-box; }
+@keyframes ornSpin { to { transform: rotate(360deg); } }
+
+.play-btn {
+  width: 236px; height: 88px; border-radius: 16px; border: none; cursor: pointer;
+  position: relative; outline: none;
+  background:
+    linear-gradient(180deg, var(--accent-bright), var(--accent) 55%, color-mix(in srgb, var(--accent) 82%, black));
+  box-shadow:
+    inset 0 0 0 5px color-mix(in srgb, var(--accent-bright) 70%, white 12%),
+    inset 0 -8px 0 color-mix(in srgb, var(--accent) 80%, black),
+    0 10px 44px var(--accent-glow);
+  color: #fff; font-size: 33px; font-weight: 900; letter-spacing: 0.06em;
+  font-family: var(--font);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.16s var(--ease), box-shadow 0.25s, filter 0.2s;
+}
+/* v4: the pulsing glow is a ::after radial layer animated on OPACITY only —
+   the old version repainted a huge box-shadow every frame (GPU cost for zero
+   visual gain). Looks identical, costs one composited layer. */
+.play-btn::after {
+  content: ''; position: absolute; inset: -18px; border-radius: 22px;
+  background: radial-gradient(closest-side, var(--accent-glow), transparent 78%);
+  opacity: .8; z-index: -1; pointer-events: none;
+  animation: glowPulse 2.6s ease-in-out infinite;
+}
+@keyframes glowPulse { 0%, 100% { opacity: .35; } 50% { opacity: .85; } }
+.play-btn:hover { transform: translateY(-3px) scale(1.02); filter: brightness(1.07); }
+.play-btn:active { transform: translateY(2px) scale(0.985); box-shadow: inset 0 0 0 5px color-mix(in srgb, var(--accent-bright) 70%, white 12%), inset 0 4px 0 color-mix(in srgb, var(--accent) 80%, black), 0 4px 18px var(--accent-glow); }
+.play-btn:disabled { animation: none; filter: grayscale(0.5) brightness(0.7); cursor: wait; transform: none; }
+.play-btn .play-label { display: flex; align-items: center; gap: 12px; justify-content: center; }
+
+.launch-target {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px; border-radius: 99px;
+  background: var(--panel); border: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); max-width: 560px;
+  animation: fadeUp 0.4s var(--ease) both;
+}
+.launch-target b { color: var(--text); font-weight: 600; }
+.launch-target .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); animation: breathe 2s infinite; flex-shrink: 0; }
+
+.launch-progress { width: 340px; display: flex; flex-direction: column; gap: 8px; }
+.progress-track { height: 8px; border-radius: 6px; background: var(--panel-2); overflow: hidden; border: 1px solid var(--border); }
+.progress-fill {
+  height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  transition: width 0.25s var(--ease); position: relative; width: 0%;
+}
+.progress-fill.indeterminate {
+  width: 100% !important;
+  background: repeating-linear-gradient(-45deg, var(--accent), var(--accent) 8px, var(--accent-bright) 8px, var(--accent-bright) 16px);
+  background-size: 40px 40px; animation: progressStripe 0.7s linear infinite;
+}
+.progress-label { font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; font-family: var(--mono); }
+
+/* ---- persistent game status banner (running / exited / failed) ---- */
+.game-status { display: flex; justify-content: center; width: 100%; }
+.status-banner {
+  display: flex; align-items: center; gap: 13px;
+  padding: 12px 18px; border-radius: 14px;
+  background: var(--panel); border: 1px solid var(--border);
+  max-width: 560px; animation: fadeUp 0.4s var(--ease) both;
+}
+.status-banner .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; background: var(--muted); }
+.status-banner.running { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); box-shadow: 0 0 24px color-mix(in srgb, var(--accent-glow) 55%, transparent); }
+.status-banner.running .dot { background: #34d399; box-shadow: 0 0 10px rgba(52, 211, 153, 0.8); }
+.status-banner.running .dot.pulse { animation: breathe 1.6s infinite; }
+.status-banner.warn { border-color: color-mix(in srgb, var(--warn) 45%, var(--border)); }
+.status-banner.warn .dot { background: var(--warn); box-shadow: 0 0 8px color-mix(in srgb, var(--warn) 70%, transparent); }
+.status-banner.error { border-color: color-mix(in srgb, var(--danger, #ef4444) 45%, var(--border)); }
+.status-banner.error .dot { background: var(--danger, #ef4444); box-shadow: 0 0 8px color-mix(in srgb, var(--danger, #ef4444) 70%, transparent); }
+.status-banner.done .dot { background: var(--accent); }
+.status-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.status-text b { font-size: 13.5px; color: var(--text); font-weight: 700; }
+.status-text span { font-size: 12px; color: var(--muted); }
+
+.stop-game-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-left: 10px; padding: 8px 14px; border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--danger, #ef4444) 55%, var(--border));
+  background: color-mix(in srgb, var(--danger, #ef4444) 16%, transparent);
+  color: var(--danger, #ef4444); font-weight: 800; font-size: 11.5px;
+  letter-spacing: 0.08em; cursor: pointer; flex-shrink: 0;
+  transition: background 0.18s var(--ease), transform 0.18s var(--ease);
+  font-family: var(--font);
+}
+.stop-game-btn:hover { background: color-mix(in srgb, var(--danger, #ef4444) 30%, transparent); transform: translateY(-1px); }
+.stop-game-btn svg { width: 12px; height: 12px; }

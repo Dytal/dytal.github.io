@@ -1,5 +1,5 @@
 # robots.txt — https://dytal.github.io/
-# NeuraX Launcher — free, open-source Minecraft launcher by Anish Sandeep Bhargav (Dytalmc)
+# NeuraX Launcher — free, fast Minecraft launcher by Anish Sandeep Bhargav (Dytalmc)
 
 User-agent: *
 Allow: /

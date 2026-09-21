@@ -1,0 +1,81 @@
+/* forms.css — forms, sliders, modals, toasts, dropdown select fields */
+
+.form-page { display: flex; justify-content: center; padding-top: 12px; }
+.form-shell {
+  width: min(660px, 100%); background: var(--panel); border: 1px solid var(--border);
+  border-radius: 16px; padding: 26px 28px 22px; display: flex; flex-direction: column; gap: 18px;
+  box-shadow: var(--shadow-1);
+}
+.form-row { display: flex; gap: 18px; align-items: flex-start; }
+.form-row > * { flex: 1; min-width: 0; }
+.form-row .grow-2 { flex: 2; }
+.form-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+
+.select-wrap { position: relative; }
+.select-wrap .caret { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--muted); }
+.select-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-2);
+  background: var(--bg-2); cursor: pointer; font-size: 14px; text-align: left;
+  transition: border-color var(--dur), box-shadow var(--dur);
+}
+.select-btn:hover { border-color: var(--accent-border); }
+.select-btn:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.select-btn .placeholder { color: var(--faint); }
+
+/* memory slider */
+.mem-slider { display: flex; flex-direction: column; gap: 9px; padding-top: 4px; }
+.mem-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; color: var(--muted); }
+.mem-head .val { font-size: 14px; font-weight: 800; color: var(--accent-bright); font-family: var(--mono); }
+input[type='range'].slider {
+  -webkit-appearance: none; width: 100%; height: 7px; border-radius: 6px; outline: none;
+  background: linear-gradient(90deg, var(--accent) var(--fill, 30%), var(--panel-2) var(--fill, 30%));
+  cursor: pointer;
+}
+input[type='range'].slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 19px; height: 19px; border-radius: 50%;
+  background: var(--accent); border: 3px solid color-mix(in srgb, var(--accent-bright) 60%, white 30%);
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 2px 8px rgba(0,0,0,.5);
+  transition: transform 0.15s var(--ease);
+}
+input[type='range'].slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+input[type='range'].slider:active::-webkit-slider-thumb { transform: scale(1.25); }
+
+/* ---------- modal ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 600; background: rgba(0, 0, 0, 0.62);
+  background: rgba(4, 6, 11, 0.62); display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 0.18s var(--ease);
+}
+.modal {
+  width: min(560px, calc(100vw - 60px)); max-height: calc(100vh - 80px); overflow-y: auto;
+  background: var(--panel); border: 1px solid var(--border-2); border-radius: 16px;
+  padding: 22px 24px; box-shadow: var(--shadow-2);
+  animation: popIn 0.26s var(--ease);
+}
+.modal h2 { font-size: 17px; margin-bottom: 4px; }
+.modal .modal-sub { color: var(--muted); font-size: 12.5px; margin-bottom: 16px; }
+.modal .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+/* ---------- toasts ---------- */
+#toast-host {
+  position: fixed; right: 18px; bottom: 18px; z-index: 800;
+  display: flex; flex-direction: column; gap: 10px; pointer-events: none;
+}
+.toast {
+  pointer-events: auto; display: flex; align-items: flex-start; gap: 11px;
+  min-width: 270px; max-width: 400px; padding: 12px 15px;
+  background: var(--panel-2); border: 1px solid var(--border-2); border-radius: 12px;
+  box-shadow: var(--shadow-2); animation: toastIn 0.3s var(--ease);
+  border-left: 3px solid var(--accent);
+}
+.toast.warn { border-left-color: var(--warn); }
+.toast.error { border-left-color: var(--danger); }
+.toast.leaving { animation: toastOut 0.25s var(--ease) forwards; }
+.toast .t-title { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+.toast .t-msg { font-size: 12.5px; color: var(--muted); line-height: 1.45; word-break: break-word; }
+.toast .t-close { margin-left: auto; cursor: pointer; color: var(--faint); background: none; border: none; font-size: 15px; padding: 0 2px; }
+.toast .t-close:hover { color: var(--text); }
+
+/* progress toast */
+.toast .t-bar { margin-top: 8px; }
