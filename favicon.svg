@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sky Hopper">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2948"/>
+      <stop offset="1" stop-color="#090f20"/>
+    </linearGradient>
+    <linearGradient id="feather" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe6a2"/>
+      <stop offset=".65" stop-color="#ffbd70"/>
+      <stop offset="1" stop-color="#dc7d67"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="18" fill="url(#sky)" stroke="#83f1d0" stroke-opacity=".35"/>
+  <circle cx="47" cy="17" r="8" fill="#bca5ff" fill-opacity=".14"/>
+  <path d="M11 39c9-1 13-13 25-16 5-1 10 1 14 7-11-2-16 11-28 12-4 0-8-1-11-3Z" fill="url(#feather)" filter="url(#glow)"/>
+  <path d="m12 39 6 11 5-9" fill="#ffb86b"/>
+  <circle cx="41" cy="28" r="2.2" fill="#18223d"/>
+  <path d="m49 31 8 3-8 3" fill="#83f1d0"/>
+  <path d="m18 15 1.4 3.6L23 20l-3.6 1.4L18 25l-1.4-3.6L13 20l3.6-1.4Z" fill="#ffe4a3"/>
+  <circle cx="47" cy="47" r="1.6" fill="#83f1d0"/>
+</svg>

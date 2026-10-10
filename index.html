@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d1c">
+  <meta name="description" content="Sky Hopper — a free, lovingly crafted one-button flying arcade game. Fly classic or try Arcade mode, unlock awards, and climb the global leaderboard.">
+  <title>Sky Hopper — Catch the sky</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="expansion.css">
+  <script src="supabase-config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Sky Hopper home">
+        <span class="brand-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M8 25c7-2 10-10 17-10 3 0 5 2 7 5-8-1-11 7-18 7-2 0-4-.6-6-2Z" fill="currentColor"/><circle cx="25.5" cy="15" r="2.1" fill="#17223e"/><path d="m8 25 4 7 4-5" fill="#ffb86b"/></svg></span>
+        <span class="brand-word">SKY<span>HOPPER</span><small>THE LITTLE FLIGHT CLUB</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="online-pill"><i></i><span id="connectionLabel">LOCAL FLIGHT</span></span>
+        <button class="store-open-button" id="openStoreBtn" type="button" aria-haspopup="dialog" aria-controls="storeDialog"><span>◆</span> Store</button>
+        <button class="account-button" id="accountBtn" type="button"><span class="avatar-mini" id="headerAvatar">✦</span><span id="accountBtnText">Sign in</span><span class="chevron">⌄</span></button>
+      </div>
+    </header>
+
+    <section class="hero-row">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-line"></span> A tiny game with big-sky energy</div>
+        <h1>Find your <span class="gradient-text">wings.</span></h1>
+        <p class="hero-copy">One tap. A hundred skies. Collect relics, find hidden paths, and make every gap count.</p>
+      </div>
+      <div class="hero-badges" aria-label="Game highlights"><span>✦ FREE FOREVER</span><span>⌁ NO PAY-TO-WIN</span><span>♡ MADE FOR REPLAY</span></div>
+    </section>
+
+    <main class="app-grid">
+      <aside class="left-rail" aria-label="Player dashboard">
+        <section class="panel profile-panel">
+          <div class="panel-heading"><span class="panel-icon violet">✧</span><div><p class="section-kicker">YOUR FLIGHT LOG</p><h2>Pilot profile</h2></div><span class="subtle-dots">•••</span></div>
+          <div class="profile-main">
+            <div class="avatar-large" id="profileAvatar">✦<span class="avatar-orbit"></span></div>
+            <div class="profile-details"><strong id="profileName">Guest Pilot</strong><span id="profileStatus" class="muted-small">Local profile</span><span class="level-pill">LEVEL <b id="levelValue">1</b></span></div>
+          </div>
+          <div class="xp-row"><span>FLIGHT XP</span><b id="xpValue">0 / 100</b></div>
+          <div class="xp-track"><span id="xpFill"></span></div>
+          <div class="profile-stats"><div><span class="stat-symbol gold">◆</span><b id="coinValue">0</b><small>COINS</small></div><div><span class="stat-symbol mint">↟</span><b id="profileBest">0</b><small>BEST FLIGHT</small></div></div>
+          <button class="outline-button full-button" id="profileAction" type="button">Create pilot account <span>↗</span></button>
+          <p class="tiny-note" id="profileFootnote">Sign in to keep your progress in the cloud.</p>
+        </section>
+
+        <section class="panel mode-panel">
+          <div class="panel-heading compact"><span class="panel-icon mint">◈</span><div><p class="section-kicker">CHOOSE YOUR SKY</p><h2>Flight mode</h2></div></div>
+          <div class="mode-switch" role="group" aria-label="Flight mode">
+            <button class="mode-option active" data-mode="classic" type="button"><span class="mode-glyph">☼</span><b>Classic</b><small>Pure flight</small></button>
+            <button class="mode-option" data-mode="arcade" type="button"><span class="mode-glyph">⚡</span><b>Arcade</b><small>3 hearts + skills</small></button>
+          </div>
+          <p class="mode-description" id="modeDescription">The original challenge. One bump ends the run. No powers, just timing.</p>
+        </section>
+
+        <section class="panel abilities-panel">
+          <div class="panel-heading compact"><span class="panel-icon coral">ϟ</span><div><p class="section-kicker">ARCADE LOADOUT</p><h2>Abilities</h2></div></div>
+          <div class="ability-list">
+            <button class="ability-item" data-ability="shield" type="button" disabled><span class="ability-icon shield-icon">◇</span><span class="ability-copy"><b>Star shield</b><small>Absorb one hit</small></span><kbd>Q</kbd><span class="ability-cooldown" id="shieldCooldown">READY</span></button>
+            <button class="ability-item" data-ability="slow" type="button" disabled><span class="ability-icon slow-icon">◷</span><span class="ability-copy"><b>Slow skies</b><small>Slow the gates</small></span><kbd>E</kbd><span class="ability-cooldown" id="slowCooldown">READY</span></button>
+            <button class="ability-item" data-ability="heal" type="button" disabled><span class="ability-icon heal-icon">＋</span><span class="ability-copy"><b>Heart bloom</b><small>Restore one heart</small></span><kbd>R</kbd><span class="ability-cooldown" id="healCooldown">READY</span></button>
+          </div>
+          <p class="tiny-note" id="abilityHint">Switch to Arcade to activate your skills.</p>
+        </section>
+      </aside>
+
+      <section class="play-column" aria-label="Game">
+        <div class="game-topline"><div><span class="live-dot"></span><span id="gameStateLabel">READY WHEN YOU ARE</span></div><button id="restartBtn" class="text-button" type="button" title="Restart flight">↻ Restart</button></div>
+        <section class="game-card">
+          <div class="game-hud">
+            <div class="hud-score"><small>FLIGHT SCORE</small><strong id="scoreValue">000</strong></div>
+            <div class="hud-center"><span class="weather-chip" id="weatherChip"><span>☀</span><span id="worldLabel">SUMMER · NOON · 12:00</span></span><span id="difficultyBadge" class="difficulty-chip" data-tier="0" hidden>NORMAL</span><span id="healthDisplay" class="health-display" hidden aria-label="Health: 3 hearts">♥ ♥ ♥</span></div>
+            <button id="soundBtn" class="sound-button" type="button" aria-label="Turn sound off" title="Toggle sound">♫</button>
+          </div>
+          <div class="canvas-frame" id="gameArea" tabindex="0" role="application" aria-label="Game area. Press Space or Arrow Up to flap. On touchscreens, tap the game.">
+            <canvas id="gameCanvas" width="420" height="640">Your browser needs canvas support to play Sky Hopper.</canvas>
+            <div class="canvas-vignette" aria-hidden="true"></div>
+            <div class="game-overlay" id="gameOverlay">
+              <div class="overlay-stars" aria-hidden="true">✦　·　✧</div>
+              <span class="overlay-kicker" id="overlayKicker">WELCOME TO THE FLIGHT CLUB</span>
+              <h2 id="overlayTitle">Ready, little bird?</h2>
+              <p id="overlayText">Tap to flap. Find the gap. Trust your wings.</p>
+              <button class="play-button" id="startBtn" type="button"><span>▶</span> Start flying</button>
+              <div class="overlay-controls"><span>SPACE / ↑</span><i></i><span>TAP ANYWHERE</span></div>
+            </div>
+            <div class="floating-score" id="floatingScore" aria-hidden="true">+1</div>
+          </div>
+          <div class="game-bottomline"><span><i class="control-key">↑</i> FLAP TO FLY</span><span class="bottom-separator"></span><span><i class="control-key">P</i> PAUSE</span><span class="bottom-separator"></span><span>MAKE EVERY GAP COUNT</span></div>
+        </section>
+        <div class="run-summary" aria-live="polite"><span class="summary-icon">✧</span><span id="runSummaryText">Your next personal best is one flight away.</span><span class="summary-flourish">✦</span></div>
+        <div class="quick-stats"><div class="quick-stat"><span class="quick-icon">↗</span><span><small>FLIGHTS</small><b id="gamesValue">0</b></span></div><div class="quick-stat"><span class="quick-icon gold">✦</span><span><small>AWARDS</small><b id="awardsValue">0 / 1,000</b></span></div><div class="quick-stat"><span class="quick-icon mint">⌁</span><span><small>BEST SCORE</small><b id="bestValue">0</b></span></div></div>
+      </section>
+
+      <aside class="right-rail" aria-label="Leaderboard and awards">
+        <section class="award-notice-panel" id="awardNoticePanel" hidden aria-live="polite" aria-atomic="true">
+          <button class="award-notice-close" id="dismissAwardNotice" type="button" aria-label="Dismiss achievement notice">×</button>
+          <div class="award-notice-icon" id="awardNoticeIcon">✦</div>
+          <div class="award-notice-copy"><span>FLIGHT MILESTONE UNLOCKED</span><b id="awardNoticeTitle">A new achievement</b><small id="awardNoticeDescription">Your journey continues.</small><em id="awardNoticeQueue">NEW RECORD</em></div>
+        </section>
+        <section class="panel leaderboard-panel">
+          <div class="panel-heading"><span class="panel-icon gold-bg">♛</span><div><p class="section-kicker">THE FLIGHT CLUB</p><h2>Leaderboard</h2></div><span class="season-badge">LIVE</span></div>
+          <div class="leader-tabs" role="group" aria-label="Leaderboard view"><button class="leader-tab active" data-leader-view="global" type="button">Global</button><button class="leader-tab" data-leader-view="local" type="button">My flights</button></div>
+          <div id="leaderboardList" class="leaderboard-list"><div class="leaderboard-empty"><span>✧</span><b>Room for a legend.</b><small>Connect the global board in setup, or start flying to build your local record.</small></div></div>
+          <div class="leaderboard-foot"><span><i></i><span id="leaderboardStatus">Waiting for first pilots</span></span><button id="refreshBoardBtn" class="refresh-button" type="button" aria-label="Refresh leaderboard" title="Refresh leaderboard">↻</button></div>
+        </section>
+
+        <section class="panel awards-panel">
+          <div class="panel-heading"><span class="panel-icon gold-bg">✦</span><div><p class="section-kicker">1000 MILESTONES</p><h2>Flight achievements</h2></div><span class="award-count" id="awardCountBadge">0/1000</span></div>
+          <div class="awards-progress"><span id="awardProgressFill"></span></div>
+          <div class="achievement-summary" id="achievementSummary">0 / 1,000 unlocked</div>
+          <div class="award-list" id="awardList"></div>
+          <button class="outline-button full-button" id="allAchievementsBtn" type="button">Explore all 1,000 achievements <span>↗</span></button>
+        </section>
+        <section class="panel collection-panel">
+          <div class="panel-heading"><span class="panel-icon mint">✧</span><div><p class="section-kicker">ARCADE RELICS</p><h2>Relic collection</h2></div><span class="award-count" id="itemCountValue">0 / 120</span></div>
+          <div class="awards-progress"><span id="collectionProgressFill"></span></div>
+          <div class="inventory-list" id="inventoryList"><div class="inventory-empty"><span>✧</span><b>Your relic shelf is waiting.</b><small>Collect glowing relics in Arcade mode.</small></div></div>
+          <button class="outline-button full-button" id="openCodexBtn" type="button">Open 120-item relic codex <span>↗</span></button>
+        </section>
+        <section class="panel store-panel store-launcher-panel">
+          <div class="panel-heading"><span class="panel-icon gold-bg">◆</span><div><p class="section-kicker">THE FLIGHT BAZAAR</p><h2>Flight Club Store</h2></div><span class="store-balance" id="storeBalance">0 coins</span></div>
+          <p class="store-intro">A sky-full of bird looks, aura effects, wing styles, trails and flight upgrades. Earn coins in Arcade; every item is bought with game coins only.</p>
+          <div class="store-showcase" aria-hidden="true"><span class="showcase-orbit orbit-one"></span><span class="showcase-orbit orbit-two"></span><span class="showcase-bird">✦</span><span class="showcase-spark spark-one">✧</span><span class="showcase-spark spark-two">✦</span></div>
+          <div class="store-launcher-bottom"><div><b>72 cosmetics</b><small>Plus permanent upgrades</small></div><button class="play-button store-enter-button" id="storeEnterBtn" type="button">Open store <span>↗</span></button></div>
+          <p class="tiny-note">Arcade rewards: 1 coin per 100 Arcade points. Classic is coin-free. Your purchases and equipped style save to Supabase.</p>
+        </section>
+        <section class="quote-card"><span class="quote-mark">“</span><p>The sky isn't the limit. It's the playground.</p><span class="quote-credit">— FLIGHT CLUB RULE #01</span><div class="quote-cloud cloud-a"></div><div class="quote-cloud cloud-b"></div></section>
+      </aside>
+    </main>
+
+    <footer class="site-footer"><a class="footer-brand" href="index.html">✦ SKY HOPPER</a><span>Made for the joy of one more try.</span><nav><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="README.md">Setup guide</a></nav><span class="footer-version">FLIGHT BUILD 1.1.0</span></footer>
+  </div>
+
+  <dialog class="store-dialog" id="storeDialog" aria-labelledby="storeDialogTitle">
+    <div class="store-dialog-shell">
+      <div class="store-dialog-header">
+        <div class="store-brandmark"><span>✦</span></div>
+        <div class="store-heading-copy"><p class="section-kicker">THE FLIGHT CLUB BAZAAR</p><h2 id="storeDialogTitle">Make the sky yours.</h2><p>Cosmetics, auras, wing trails and workshop upgrades. Earned coins only.</p></div>
+        <div class="store-wallet"><span>YOUR WALLET</span><strong><i>◆</i><b id="storeDialogBalance">0</b></strong><small>Coins · Arcade rewards</small></div>
+        <button class="dialog-close" id="closeStoreBtn" type="button" aria-label="Close store">×</button>
+      </div>
+      <div class="store-ribbon"><span class="ribbon-dot"></span><span>NO REAL-MONEY PURCHASES</span><i></i><span>ITEMS UP TO 100 COINS</span><i></i><span>YOUR COLLECTION SAVES TO THE CLOUD</span></div>
+      <nav class="store-tabs" role="tablist" aria-label="Store departments">
+        <button class="store-tab active" type="button" role="tab" aria-selected="true" data-store-tab="birds"><span>◉</span> Bird looks</button>
+        <button class="store-tab" type="button" role="tab" aria-selected="false" data-store-tab="auras"><span>✧</span> Auras</button>
+        <button class="store-tab" type="button" role="tab" aria-selected="false" data-store-tab="trails"><span>〰</span> Trails & wings</button>
+        <button class="store-tab" type="button" role="tab" aria-selected="false" data-store-tab="upgrades"><span>⚙</span> Upgrades</button>
+      </nav>
+      <div class="store-toolbar"><div><strong id="storeDepartmentTitle">Bird looks</strong><span id="storeDepartmentSubtitle">Change your look. Keep your classic silhouette.</span></div><label class="store-search"><span>⌕</span><input id="storeSearch" type="search" placeholder="Search the bazaar…" aria-label="Search store items"></label></div>
+      <div class="store-feature-strip"><span class="feature-star">✦</span><div><b id="storeFeatureTitle">A little personality goes a long way.</b><small id="storeFeatureText">Each cosmetic has its own colourway, texture, identity and atmosphere.</small></div><span class="feature-sparkle">✧</span></div>
+      <div class="store-product-grid" id="storeCosmeticList" role="tabpanel" aria-label="Store catalogue"></div>
+      <div class="store-upgrade-section" id="storeUpgradeSection" hidden><p class="store-section-kicker">PERMANENT FLIGHT ENGINEERING</p><div id="storeList" class="store-list"></div></div>
+      <div class="store-dialog-footer"><span><i>✦</i> Every purchase is cosmetic or gameplay progression, never cash value.</span><button class="outline-button" id="storeFooterClose" type="button">Back to the sky</button></div>
+    </div>
+  </dialog>
+
+  <dialog class="auth-dialog" id="authDialog" aria-labelledby="authTitle">
+    <form class="auth-card" id="authForm">
+      <button class="dialog-close" id="closeAuthBtn" type="button" aria-label="Close sign-in dialog">×</button>
+      <div class="auth-logo">✦</div><p class="section-kicker" id="authEyebrow">WELCOME BACK, PILOT</p><h2 id="authTitle">Enter the flight club.</h2><p class="auth-subtitle" id="authSubtitle">Sign in to sync your scores, awards and flight log.</p>
+      <div class="auth-tabs" role="group" aria-label="Account action"><button type="button" class="auth-tab active" data-auth-mode="signin">Sign in</button><button type="button" class="auth-tab" data-auth-mode="signup">Create account</button></div>
+      <label class="auth-field" id="usernameField" hidden><span>PILOT NAME</span><input id="authUsername" name="username" type="text" minlength="3" maxlength="16" autocomplete="username" placeholder="e.g. cloudchaser" pattern="[A-Za-z0-9_]{3,16}"><small>3–16 letters, numbers or underscores. Your name appears on the public leaderboard.</small></label>
+      <label class="auth-field"><span>EMAIL</span><input id="authEmail" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+      <label class="auth-field"><span>PASSWORD</span><input id="authPassword" name="password" type="password" minlength="8" autocomplete="current-password" required placeholder="At least 8 characters"></label>
+      <div class="auth-message" id="authMessage" role="status" aria-live="polite"></div>
+      <button class="play-button auth-submit" id="authSubmitBtn" type="submit">Sign in <span>↗</span></button>
+      <p class="auth-legal">Your profile, coins, upgrades, collected relics and achievements are stored in Supabase. Your email is never shown publicly.</p>
+      <p class="auth-local-note" id="authBackendNote">Supabase setup is required for permanent cloud progress. Guest progress is memory-only and disappears on refresh.</p>
+    </form>
+  </dialog>
+  <dialog class="collection-dialog" id="achievementDialog" aria-labelledby="achievementDialogTitle">
+    <div class="collection-dialog-card"><button class="dialog-close" id="closeAchievementDialog" type="button" aria-label="Close achievements">×</button><p class="section-kicker">THE LONG FLIGHT</p><h2 id="achievementDialogTitle">Achievement atlas</h2><p>One thousand milestones, from first flights to feats only the most persistent pilots will find.</p>
+      <div class="catalog-filters"><input id="achievementSearch" type="search" placeholder="Search achievements…" aria-label="Search achievements"><select id="achievementCategory" aria-label="Filter achievement category"><option value="all">All categories</option><option value="score">Best score</option><option value="flights">Flights</option><option value="items">Relics collected</option><option value="rare">Rare finds</option><option value="arcade">Arcade score</option><option value="upgrades">Store purchases</option></select></div>
+      <div class="catalog-results" id="achievementResults"></div><div class="catalog-list" id="achievementCatalog"></div><button class="outline-button full-button" id="loadMoreAchievements" type="button">Load more achievements</button>
+    </div>
+  </dialog>
+  <dialog class="collection-dialog" id="codexDialog" aria-labelledby="codexDialogTitle">
+    <div class="collection-dialog-card codex-dialog-card"><button class="dialog-close" id="closeCodexDialog" type="button" aria-label="Close relic codex">×</button><p class="section-kicker">FIELD GUIDE</p><h2 id="codexDialogTitle">Relic codex</h2><p>120 collectable relic designs across six rarities. Drop chances change slightly with your Rarity Compass upgrade. Item odds shown are per collectible spawn.</p>
+      <div class="rarity-legend"><span style="--rarity-color:#c4cfdd">COMMON 48%</span><span style="--rarity-color:#83f1d0">UNCOMMON 28%</span><span style="--rarity-color:#86dfff">RARE 15%</span><span style="--rarity-color:#bca5ff">EPIC 6.5%</span><span style="--rarity-color:#ffd68a">LEGENDARY 2%</span><span style="--rarity-color:#ffa79c">MYTHIC 0.5%</span></div>
+      <div class="catalog-filters"><input id="codexSearch" type="search" placeholder="Search relic designs…" aria-label="Search relics"><select id="codexRarity" aria-label="Filter rarity"><option value="all">All rarities</option><option value="common">Common</option><option value="uncommon">Uncommon</option><option value="rare">Rare</option><option value="epic">Epic</option><option value="legendary">Legendary</option><option value="mythic">Mythic</option></select></div>
+      <div class="catalog-results" id="codexResults"></div><div class="codex-list" id="codexList"></div>
+    </div>
+  </dialog>
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
