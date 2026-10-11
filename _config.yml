@@ -1,0 +1,12 @@
+# GitHub Pages / Jekyll configuration for Sky Hopper.
+# Keep this minimal so the existing custom HTML, CSS and JavaScript remain unchanged.
+title: "Sky Hopper — Catch the sky"
+description: "Play Sky Hopper, a free Flappy-style browser arcade game. Fly through changing skies, collect relics, unlock achievements, and customise your bird."
+url: "https://dytal.github.io"
+baseurl: ""
+lang: "en-GB"
+timezone: "Europe/London"
+markdown: kramdown
+
+# The robots.txt and sitemap.xml files are maintained manually in the repository root.
+# No theme is enabled so the existing site design is preserved.
