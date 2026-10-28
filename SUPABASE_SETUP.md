@@ -6,7 +6,7 @@ This guide enables cloud accounts, player profiles, Arcade coin rewards, long-te
 
 **Fresh database:** create a Supabase project, open **SQL Editor → New query**, paste the complete `supabase.sql` file from the project root (or its duplicate `supabase/schema.sql`), and run it once.
 
-**Existing Sky Hopper database:** if you already installed the previous Sky Hopper master schema, back up the project and run only `supabase/store_cosmetics_coins_patch.sql`. This migration is additive/upgrade-oriented and does not delete existing player rows. Do not run both installation paths on the same database.
+**Existing Sky Hopper database:** if you already installed the previous Sky Hopper master schema, back up the project and run `supabase/store_cosmetics_coins_patch.sql`. This migration also adds the secure custom-name RPC and does not delete existing player rows. If you already ran this store/cosmetics migration before the custom-name update was added, run only `supabase/set_pilot_username_patch.sql`. Do not run the full master schema on a live database as a substitute for the migration.
 
 After running, review the entire SQL Editor result. The migration checks for 1,000 achievements, 120 abilities and 72 store cosmetics, verifies that prices are between 0 and 100 coins, and verifies that the four default cosmetics cost zero. If the query reports an error, stop and resolve it before publishing the frontend update.
 
@@ -53,6 +53,8 @@ Keep `index.html`, `app.js`, `styles.css`, `expansion.css` and `supabase-config.
 5. Buy a cosmetic or upgrade. Confirm the purchase deducts coins and adds the owned item/upgrade in the database.
 6. Equip a purchased cosmetic and check `player_loadout`. Reload the page, sign in again, and verify the equipped style and wallet reload from Supabase.
 7. Unlock an achievement and confirm a row appears in `user_achievements`. Achievement notices should appear in the side rail, not over the canvas.
+8. Change the pilot name while signed in. Confirm the new unique name appears in the profile and global leaderboard. If the custom-name RPC is missing, run the standalone patch described above.
+9. Play Arcade repeatedly and check that relics appear with visible room around gates rather than overlapping a pipe.
 
 ## 6. Where data lives
 
@@ -67,7 +69,7 @@ Keep `index.html`, `app.js`, `styles.css`, `expansion.css` and `supabase-config.
 - `player_cosmetics`: each player's purchased/claimed cosmetics.
 - `player_loadout`: currently equipped bird, aura, trail and wing styles.
 
-Guest state is held in memory only and is discarded on refresh/close. The current flight's physics necessarily runs in memory while playing, but durable progression and auth sessions are not saved in browser storage.
+Guest progression is held in memory only and is discarded on refresh/close. A guest's chosen display-name preference alone is stored under `skyhopper_pilot_name` in local storage; it is not a progress save and is not shared with the global leaderboard. The current flight's physics necessarily runs in memory while playing.
 
 ## Economy logic
 
@@ -91,4 +93,4 @@ This corresponds to 0.01 coin per Arcade point, credited as whole coins at each 
 
 ## Important limitations and privacy
 
-The browser score is validated, but not fully cheat-proof: a determined user can fabricate plausible runs. A server-authoritative game/session system is needed for competitive-grade anti-cheat. The included `privacy.html` is a starter notice, not legal advice. Add a monitored contact address and review age/privacy requirements, data deletion and advertising consent before launching publicly. If you are under 18, have a parent or guardian review the account, payment and privacy settings.
+The browser score is validated, but not fully cheat-proof: a determined user can fabricate plausible runs. A server-authoritative game/session system is needed for competitive-grade anti-cheat. The included `privacy.html` is a project notice, not legal advice. Publish a monitored private contact method, verify account/data deletion, and configure the required Google-certified Consent Management Platform in AdSense Privacy & Messaging before serving personalised ads to UK/EEA/Swiss visitors. Review the notice after any tracking, ad or database changes. Google requires AdSense applicants to be 18+; applicants under 18 need a parent/guardian to apply using their own Google Account.

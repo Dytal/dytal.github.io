@@ -1,3 +1,4 @@
+/* Copyright (c) 2026 Anish Sandeep Bhargav (Dytalmc). Licensed under the MIT License; see LICENSE. */
 /* Sky Hopper Flight Club expansion — seasonal atmosphere, relic codex and workshop. */
 :root{--teal:#83f1d0;--sky:#86dfff;--rose:#ffa79c;--amber:#ffd68a;--iris:#bca5ff}
 .weather-chip{max-width:190px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -1,3 +1,4 @@
+<!-- Copyright (c) 2026 Anish Sandeep Bhargav (Dytalmc). Licensed under the MIT License; see LICENSE. -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,15 +7,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080d1c">
-  <meta name="description" content="Sky Hopper — a free, lovingly crafted one-button flying arcade game. Fly classic or try Arcade mode, unlock awards, and climb the global leaderboard.">
-  <title>Sky Hopper — Catch the sky</title>
+  <meta name="description" content="Play Sky Hopper, an original free browser flight game. Learn the controls, compare Classic and Arcade modes, discover relic abilities, and customise your pilot name.">
+  <meta name="author" content="Anish Sandeep Bhargav (Dytalmc)">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://dytal.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sky Hopper — Free browser flight game">
+  <meta property="og:description" content="A hand-built flying arcade game with two modes, relics, abilities and a custom pilot profile.">
+  <meta property="og:url" content="https://dytal.github.io/">
+  <meta property="og:site_name" content="Sky Hopper">
+  <title>Sky Hopper — Free Browser Flight Game</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="expansion.css">
+  <link rel="stylesheet" href="content.css">
   <script src="supabase-config.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#how-to-play">Skip to game guide</a>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
   <div class="app-shell">
@@ -39,7 +50,8 @@
       <div class="hero-badges" aria-label="Game highlights"><span>✦ FREE FOREVER</span><span>⌁ NO PAY-TO-WIN</span><span>♡ MADE FOR REPLAY</span></div>
     </section>
 
-    <main class="app-grid">
+    <main class="site-main">
+    <div class="app-grid">
       <aside class="left-rail" aria-label="Player dashboard">
         <section class="panel profile-panel">
           <div class="panel-heading"><span class="panel-icon violet">✧</span><div><p class="section-kicker">YOUR FLIGHT LOG</p><h2>Pilot profile</h2></div><span class="subtle-dots">•••</span></div>
@@ -50,8 +62,9 @@
           <div class="xp-row"><span>FLIGHT XP</span><b id="xpValue">0 / 100</b></div>
           <div class="xp-track"><span id="xpFill"></span></div>
           <div class="profile-stats"><div><span class="stat-symbol gold">◆</span><b id="coinValue">0</b><small>COINS</small></div><div><span class="stat-symbol mint">↟</span><b id="profileBest">0</b><small>BEST FLIGHT</small></div></div>
+          <button class="outline-button full-button" id="editPilotNameBtn" type="button">Choose pilot name <span>↗</span></button>
           <button class="outline-button full-button" id="profileAction" type="button">Create pilot account <span>↗</span></button>
-          <p class="tiny-note" id="profileFootnote">Sign in to keep your progress in the cloud.</p>
+          <p class="tiny-note" id="profileFootnote">Choose a display name. Guest scores are temporary; the name stays on this device.</p>
         </section>
 
         <section class="panel mode-panel">
@@ -134,11 +147,63 @@
           <div class="store-launcher-bottom"><div><b>72 cosmetics</b><small>Plus permanent upgrades</small></div><button class="play-button store-enter-button" id="storeEnterBtn" type="button">Open store <span>↗</span></button></div>
           <p class="tiny-note">Arcade rewards: 1 coin per 100 Arcade points. Classic is coin-free. Your purchases and equipped style save to Supabase.</p>
         </section>
-        <section class="quote-card"><span class="quote-mark">“</span><p>The sky isn't the limit. It's the playground.</p><span class="quote-credit">— FLIGHT CLUB RULE #01</span><div class="quote-cloud cloud-a"></div><div class="quote-cloud cloud-b"></div></section>
       </aside>
+    </div><!-- /.app-grid -->
+
+    <section class="editorial-section" id="how-to-play" aria-labelledby="howToPlayTitle">
+      <div class="editorial-heading">
+        <p class="editorial-kicker">THE PILOT'S FIELD GUIDE</p>
+        <h2 id="howToPlayTitle">How to play <span class="gradient-text">Sky Hopper</span></h2>
+        <p>Sky Hopper is an original one-button flying game. Your job is to guide the bird through each open gate, manage your rhythm, and learn how the two flight modes behave.</p>
+      </div>
+      <div class="editorial-grid editorial-grid-3">
+        <article class="editorial-card"><span class="editorial-step">01 · CONTROL</span><h3>Use short, deliberate flaps</h3><p>Each flap gives the bird a quick upward impulse, then gravity pulls it down again. Repeatedly holding a key does not make the bird rise continuously; time each press and watch the bird's position rather than the score counter.</p><p class="editorial-detail"><strong>Keyboard:</strong> Space, ↑ or W. <strong>Mouse:</strong> click the play area. <strong>Touch:</strong> tap the game.</p></article>
+        <article class="editorial-card"><span class="editorial-step">02 · TIMING</span><h3>Plan for the next gate</h3><p>Look through the gap before the gate reaches the bird. Aim for the middle of the opening instead of grazing either edge. If the next opening sits higher, start rising earlier; if it sits lower, stop flapping and let gravity do some of the work.</p><p class="editorial-detail"><strong>Pause:</strong> press P or Escape when a run is active.</p></article>
+        <article class="editorial-card"><span class="editorial-step">03 · PRACTICE</span><h3>Build consistency before speed</h3><p>Classic is the best place to practise the basic rhythm without collectible effects. Arcade adds health, abilities, relics and more variable gate layouts. A steady sequence of safe crossings is more useful than chasing one risky pickup.</p><p class="editorial-detail"><strong>Restart:</strong> use the Restart button whenever you want a fresh attempt.</p></article>
+      </div>
+    </section>
+
+    <section class="editorial-section" id="flight-modes" aria-labelledby="flightModesTitle">
+      <div class="editorial-heading"><p class="editorial-kicker">TWO FLIGHT STYLES</p><h2 id="flightModesTitle">Choose the sky that suits you</h2><p>Both modes use the same core movement, but they reward different decisions.</p></div>
+      <div class="editorial-grid editorial-grid-2">
+        <article class="editorial-card mode-card"><div class="editorial-card-top"><span class="editorial-icon">☼</span><span class="editorial-tag">NO POWER-UPS</span></div><h3>Classic mode</h3><p>Classic is a clean test of timing and control. One collision ends the attempt, gates gradually become quicker, and there are no manual skills or relic pickups to distract you.</p><ul><li>One hit ends the run.</li><li>Gate crossings add score.</li><li>Classic runs do not earn coins.</li></ul><p><strong>Good for:</strong> learning the flight arc and setting a personal best.</p></article>
+        <article class="editorial-card mode-card"><div class="editorial-card-top"><span class="editorial-icon">⚡</span><span class="editorial-tag">RELICS & ABILITIES</span></div><h3>Arcade mode</h3><p>Arcade starts at Normal and moves through Swift, Hard, Expert and Chaos as your score rises. It gives you multiple hearts, collectible relics and three timed abilities, so planning matters as much as reflexes.</p><ul><li>Use Q for Star Shield, E for Slow Skies and R for Heart Bloom.</li><li>Relics can grant protection, healing, lift, magnet reach, time effects or bonus points.</li><li>Earn one whole coin for every 100 cumulative Arcade points.</li></ul><p><strong>Good for:</strong> experimenting with abilities and collecting the relic codex.</p></article>
+      </div>
+    </section>
+
+    <section class="editorial-section" id="relic-guide" aria-labelledby="relicGuideTitle">
+      <div class="editorial-heading"><p class="editorial-kicker">ARCADE FIELD NOTES</p><h2 id="relicGuideTitle">Understand relics before you chase them</h2><p>Relics appear as glowing symbols during Arcade flights. Each pickup has a fixed identity once it spawns; the colour and symbol help you recognise its effect.</p></div>
+      <div class="editorial-grid editorial-grid-3 relic-guide-grid">
+        <article class="editorial-card"><h3>Protection</h3><p><strong>Aegis and Ward</strong> relics create a protective shield or a brief window of invulnerability. They are useful when the upcoming gate looks awkward, but they are not a reason to deliberately hit a pipe.</p></article>
+        <article class="editorial-card"><h3>Time and recovery</h3><p><strong>Hourglass and Time Shard</strong> relics slow the world for a short period. <strong>Heart</strong> relics restore a heart when you have room, or provide a short protective effect when your hearts are already full.</p></article>
+        <article class="editorial-card"><h3>Movement and score</h3><p><strong>Magnet</strong> relics widen the pickup reach temporarily, <strong>Gust</strong> gives the bird an upward burst, and <strong>Star</strong> stores bonus points for later gate crossings. Score relics do not award coins directly.</p></article>
+      </div>
+      <div class="editorial-note"><strong>Pickup safety:</strong> a relic is optional. Keep your bird clear of the gate first; do not change a safe flight path just to collect a glowing item. The full codex lists each relic's rarity, name and effect.</div>
+    </section>
+
+    <section class="editorial-section" id="scores-and-coins" aria-labelledby="scoresCoinsTitle">
+      <div class="editorial-heading"><p class="editorial-kicker">PROGRESSION WITHOUT CASH</p><h2 id="scoresCoinsTitle">How scores, coins and upgrades work</h2><p>The game has no real-money checkout. Coins are a gameplay reward, and the store uses them for cosmetic styles and permanent upgrades.</p></div>
+      <div class="editorial-grid editorial-grid-2">
+        <article class="editorial-card"><h3>The Arcade coin rule</h3><p>Coins accumulate against your lifetime Arcade score, not separately for every short run. Crossing each 100-point threshold credits one coin; partial progress carries over. For example, 72 points in one flight and 35 in a later flight crosses the 100-point mark and earns one coin on the second flight.</p><p>Classic contributes zero to the Arcade total, so it never adds coins. Collecting a relic, earning XP or setting a best score does not create a separate coin bonus.</p></article>
+        <article class="editorial-card"><h3>What the workshop changes</h3><p>Cosmetics change the bird, aura, trail and wing appearance. Upgrades tune shield duration, cooldowns, starting hearts, relic attraction, rarity weighting, score bonuses or Gust lift. Prices are shown before purchase and are capped at 100 coins.</p><p>Signed-in purchases use database functions to check the balance before deducting coins. Guest progression is temporary and cannot make cloud purchases; create an account if you want long-term inventory and flight history.</p></article>
+      </div>
+    </section>
+
+    <section class="editorial-section" id="quick-faq" aria-labelledby="quickFaqTitle">
+      <div class="editorial-heading"><p class="editorial-kicker">COMMON QUESTIONS</p><h2 id="quickFaqTitle">Quick answers for pilots</h2></div>
+      <div class="editorial-faq">
+        <details><summary>Why did my guest score disappear?</summary><p>Guest scores, coins, relic counts and achievements are stored only in the current page session. Your custom pilot name is saved separately on this device, but it does not save progression. Create and sign in to a pilot account to sync progression to the configured cloud database.</p></details>
+        <details><summary>Can I change my pilot name later?</summary><p>Yes. Use the Choose/Change pilot name control in the Pilot profile panel. Guest names are stored on the current device; signed-in names update the public profile and may be visible on the leaderboard. Use a nickname that does not disclose personal details.</p></details>
+        <details><summary>Why can't I use abilities in Classic?</summary><p>Classic is deliberately kept as a pure timing challenge. Select Arcade to unlock hearts, Q/E/R abilities and relic pickups.</p></details>
+        <details><summary>Why did I receive no coin after a flight?</summary><p>Only Arcade points contribute to coin rewards. A coin is credited when your cumulative Arcade score crosses another 100-point threshold, so a short run may add progress without awarding a whole coin immediately.</p></details>
+        <details><summary>Do I need an account to play?</summary><p>No. The core flight game is playable as a guest. An account is optional and is needed for permanent cloud saves, account inventory, cloud achievements and the shared profile leaderboard.</p></details>
+        <details><summary>What should I do if the game or an item looks wrong?</summary><p>Refresh the page first and try a new Arcade flight. If the problem repeats, note your browser, device, game mode and the steps that caused it, then use the Contact page to submit a bug report. Never include your password or other private information in a public report.</p></details>
+      </div>
+      <p class="editorial-more-links">Read the <a href="guide.html">full gameplay guide</a>, the <a href="faq.html">complete FAQ</a>, or learn <a href="about.html">who made Sky Hopper</a>.</p>
+    </section>
     </main>
 
-    <footer class="site-footer"><a class="footer-brand" href="index.html">✦ SKY HOPPER</a><span>Made for the joy of one more try.</span><nav><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="README.md">Setup guide</a></nav><span class="footer-version">FLIGHT BUILD 1.1.0</span></footer>
+    <footer class="site-footer"><a class="footer-brand" href="index.html">✦ SKY HOPPER</a><span>Original game by Anish Sandeep Bhargav (Dytalmc).</span><nav aria-label="Footer"><a href="guide.html">Game guide</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="license.html">License</a></nav><span class="footer-version">BUILD 1.2.0</span><span class="footer-copyright">© 2026 Anish Sandeep Bhargav (Dytalmc) · <a href="LICENSE">MIT License</a></span></footer>
   </div>
 
   <dialog class="store-dialog" id="storeDialog" aria-labelledby="storeDialogTitle">
@@ -162,6 +227,18 @@
       <div class="store-upgrade-section" id="storeUpgradeSection" hidden><p class="store-section-kicker">PERMANENT FLIGHT ENGINEERING</p><div id="storeList" class="store-list"></div></div>
       <div class="store-dialog-footer"><span><i>✦</i> Every purchase is cosmetic or gameplay progression, never cash value.</span><button class="outline-button" id="storeFooterClose" type="button">Back to the sky</button></div>
     </div>
+  </dialog>
+
+  <dialog class="auth-dialog pilot-name-dialog" id="pilotNameDialog" aria-labelledby="pilotNameTitle">
+    <form class="auth-card" id="pilotNameForm">
+      <button class="dialog-close" id="closePilotNameBtn" type="button" aria-label="Close pilot name dialog">×</button>
+      <div class="auth-logo">✦</div><p class="section-kicker">YOUR FLIGHT IDENTITY</p><h2 id="pilotNameTitle">Choose your pilot name.</h2>
+      <p class="auth-subtitle">Pick a short name for your profile and flight history. Use a nickname, not personal information.</p>
+      <label class="auth-field"><span>PILOT NAME</span><input id="pilotNameInput" name="pilotName" type="text" minlength="3" maxlength="16" autocomplete="nickname" placeholder="e.g. cloudchaser" pattern="[A-Za-z0-9_]{3,16}" required><small>3–16 letters, numbers or underscores. The name is displayed on your profile.</small></label>
+      <div class="auth-message" id="pilotNameMessage" role="status" aria-live="polite"></div>
+      <button class="play-button auth-submit" id="pilotNameSaveBtn" type="submit">Save pilot name <span>↗</span></button>
+      <p class="auth-local-note" id="pilotNamePrivacyNote">Guest names are saved on this device only. Guest scores and progression remain temporary.</p>
+    </form>
   </dialog>
 
   <dialog class="auth-dialog" id="authDialog" aria-labelledby="authTitle">

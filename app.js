@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Anish Sandeep Bhargav (Dytalmc). Licensed under the MIT License; see LICENSE.
 (() => {
   'use strict';
 
@@ -157,7 +158,17 @@
   const COSMETIC_DEFAULTS = { bird: 'bird_classic', aura: 'aura_none', trail: 'trail_none', wings: 'wings_classic' };
   const palette = ['#bca5ff', '#83f1d0', '#ffd68a', '#86dfff', '#ffa79c'];
   const defaultSave = () => ({ bestScore: 0, gamesPlayed: 0, xp: 0, coins: 0, awards: [], runs: [], lifetimeScore: 0, arcadeScore: 0, itemsCollected: 0, rareItems: 0, upgradesPurchased: 0, inventory: {}, upgrades: {} });
-  // Gameplay progress is intentionally memory-only for guests. Durable player data is cloud-only.
+  const PILOT_NAME_STORAGE_KEY = 'skyhopper_pilot_name';
+  function normalisePilotName(value) { return String(value ?? '').trim().toLowerCase(); }
+  function validPilotName(value) { return /^[a-z0-9_]{3,16}$/.test(value); }
+  function readGuestPilotName() {
+    try {
+      const value = normalisePilotName(window.localStorage.getItem(PILOT_NAME_STORAGE_KEY));
+      return validPilotName(value) ? value : 'Guest Pilot';
+    } catch { return 'Guest Pilot'; }
+  }
+  // Gameplay progression remains session-only for guests; only their non-sensitive display-name preference persists.
+  let guestPilotName = readGuestPilotName();
   let localSave = defaultSave();
   let guestRuns = [];
   let supabase = null;
@@ -193,9 +204,10 @@
     summary: $('#runSummaryText'), floatingScore: $('#floatingScore'), sound: $('#soundBtn'), connection: $('#connectionLabel'),
     accountBtn: $('#accountBtn'), accountBtnText: $('#accountBtnText'), headerAvatar: $('#headerAvatar'), profileName: $('#profileName'),
     profileStatus: $('#profileStatus'), profileAvatar: $('#profileAvatar'), level: $('#levelValue'), xp: $('#xpValue'), xpFill: $('#xpFill'),
-    coins: $('#coinValue'), profileBest: $('#profileBest'), profileAction: $('#profileAction'), profileFootnote: $('#profileFootnote'),
+    coins: $('#coinValue'), profileBest: $('#profileBest'), profileAction: $('#profileAction'), editPilotNameBtn: $('#editPilotNameBtn'), profileFootnote: $('#profileFootnote'),
     modeDescription: $('#modeDescription'), abilityHint: $('#abilityHint'), leaderboard: $('#leaderboardList'), leaderboardStatus: $('#leaderboardStatus'),
     authDialog: $('#authDialog'), authForm: $('#authForm'), authTitle: $('#authTitle'), authEyebrow: $('#authEyebrow'),
+    pilotNameDialog: $('#pilotNameDialog'), pilotNameForm: $('#pilotNameForm'), pilotNameInput: $('#pilotNameInput'), pilotNameMessage: $('#pilotNameMessage'), pilotNameSaveBtn: $('#pilotNameSaveBtn'), pilotNamePrivacyNote: $('#pilotNamePrivacyNote'),
     authSubtitle: $('#authSubtitle'), authUsername: $('#authUsername'), usernameField: $('#usernameField'), authEmail: $('#authEmail'),
     authPassword: $('#authPassword'), authMessage: $('#authMessage'), authSubmitBtn: $('#authSubmitBtn'), authBackendNote: $('#authBackendNote'),
     toastRegion: $('#toastRegion'), difficulty: $('#difficultyBadge'), worldLabel: $('#worldLabel'),
@@ -261,13 +273,14 @@
 
   function updateProfileUI() {
     const stats = activeStats();
-    const name = authUser ? (cloudProfile?.username || authUser.user_metadata?.username || 'New Pilot') : 'Guest Pilot';
+    const name = authUser ? (cloudProfile?.username || authUser.user_metadata?.username || 'New Pilot') : guestPilotName;
     const level = xpWithinLevel(stats.xp || 0);
     els.profileName.textContent = name;
     els.profileStatus.textContent = authUser ? 'Cloud-synced pilot account' : 'Guest · session only';
-    els.profileAvatar.textContent = authUser ? '✦' : '✧';
-    els.headerAvatar.textContent = authUser ? (name.charAt(0).toUpperCase() || '✦') : '✦';
+    els.profileAvatar.textContent = name.charAt(0).toUpperCase() || (authUser ? '✦' : '✧');
+    els.headerAvatar.textContent = name.charAt(0).toUpperCase() || '✦';
     els.accountBtnText.textContent = authUser ? 'Account' : 'Sign in';
+    els.editPilotNameBtn.innerHTML = `${authUser ? 'Change pilot name' : (guestPilotName === 'Guest Pilot' ? 'Choose pilot name' : 'Change pilot name')} <span>↗</span>`;
     els.level.textContent = String(level.level);
     els.xp.textContent = `${level.current} / ${level.needed}`;
     els.xpFill.style.width = `${Math.max(0, level.percent)}%`;
@@ -279,7 +292,7 @@
     $('#awardCountBadge').textContent = `${stats.awards.length.toLocaleString()}/${AWARDS.length.toLocaleString()}`;
     $('#awardProgressFill').style.width = `${stats.awards.length / AWARDS.length * 100}%`;
     els.profileAction.textContent = authUser ? 'Sign out of flight club ↗' : 'Create pilot account ↗';
-    els.profileFootnote.textContent = authUser ? 'Progress, relics, coins and upgrades sync to Supabase.' : 'Guest progress lasts only until this page is refreshed. Sign in to save it to the cloud.';
+    els.profileFootnote.textContent = authUser ? 'Progress, relics, coins and upgrades sync to Supabase.' : 'Guest progress lasts until refresh; your display name stays on this device. Sign in for cloud saves.';
     els.connection.textContent = authUser && cloudProfile ? 'CLOUD FLIGHT LOG' : (supabase ? 'CLOUD READY · GUEST' : 'GUEST FLIGHT');
     $('.online-pill').classList.toggle('is-connected', Boolean(supabase && authUser));
     if (authUser && !cloudProfile) els.profileStatus.textContent = 'Loading cloud pilot data…';
@@ -648,7 +661,7 @@
       localSave.coins += coinsEarned;
       localSave.lifetimeScore = newLifetime;
       localSave.arcadeScore = newArcade;
-      guestRuns.unshift({ score: finalScore, mode: runMode, playedAt: new Date().toISOString() });
+      guestRuns.unshift({ score: finalScore, mode: runMode, pilotName: guestPilotName, playedAt: new Date().toISOString() });
       guestRuns = guestRuns.slice(0, 12);
       newly = unlockLocalAwards();
     }
@@ -1004,7 +1017,17 @@
     game.groundOffset = (game.groundOffset + speed * step) % 25;
     game.spawn += step * pace;
     const spawnTarget = mode === 'arcade' ? Math.max(66, 100 - Math.floor(game.score / 7) * 1.7) : 100;
-    if (game.spawn > spawnTarget) { game.pipes.push(makePipe(W + 28)); game.spawn -= spawnTarget; }
+    const nextPipeX = W + 28;
+    // A future gate could otherwise spawn beside an already-moving relic. Defer that
+    // gate briefly while the relic is within its horizontal danger zone. Clamp the spawn
+    // accumulator so the delay cannot make several gates bunch up on the next frame.
+    const pickupBlocksGateSpawn = mode === 'arcade' && game.pickups.some(pickup => Math.abs(pickup.x - nextPipeX) < 132);
+    if (pickupBlocksGateSpawn) {
+      game.spawn = Math.min(game.spawn, spawnTarget);
+    } else if (game.spawn > spawnTarget) {
+      game.pipes.push(makePipe(nextPipeX));
+      game.spawn -= spawnTarget;
+    }
     for (const pipe of game.pipes) {
       pipe.x -= speed * step * pace;
       if (!pipe.passed && pipe.x + pipe.w < b.x) {
@@ -1026,7 +1049,20 @@
       game.pickupTimer += elapsed;
       if (game.pickupTimer > 6200 + Math.random() * 4900 && game.pickups.length < 1) {
         const item = chooseAbilityItem();
-        game.pickups.push({ item, x: W + 26, y: 95 + Math.random() * (H - GROUND - 175), phase: Math.random() * Math.PI * 2, collected: false });
+        // All gates and relics move at the same pace. Spawn relics well beyond the newest
+        // gate's right edge so their sprite never overlaps a pipe, including the gate that
+        // may have been created earlier in this same update. Keep additional room for glow.
+        const pickupRadius = 28;
+        const gateClearance = 78;
+        const maxPipeWidth = 72;
+        let pickupX = W + 28 + maxPipeWidth + pickupRadius + gateClearance;
+        for (const pipe of game.pipes) {
+          const pipeLeft = pipe.x - pickupRadius - gateClearance;
+          const pipeRight = pipe.x + pipe.w + pickupRadius + gateClearance;
+          if (pickupX >= pipeLeft && pickupX <= pipeRight) pickupX = pipeRight;
+        }
+        const pickupY = 95 + Math.random() * (H - GROUND - 175);
+        game.pickups.push({ item, x: pickupX, y: pickupY, phase: Math.random() * Math.PI * 2, collected: false });
         game.pickupTimer = 0;
       }
       for (const pickup of game.pickups) {
@@ -1061,7 +1097,7 @@
     els.leaderboard.innerHTML = runs.slice(0, 8).map((run, index) => {
       const stamp = run.playedAt ? new Date(run.playedAt) : null;
       const date = stamp && !Number.isNaN(stamp.getTime()) ? stamp.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }) : 'Recent';
-      return `<div class="leader-row"><span class="leader-rank">${String(index + 1).padStart(2, '0')}</span><span class="leader-avatar">${run.mode === 'arcade' ? '⚡' : '✦'}</span><span class="leader-user"><b>${safeText(run.mode === 'arcade' ? 'Arcade flight' : 'Classic flight')}</b><small>${safeText(date)} · ${safeText(run.mode)}</small></span><span class="leader-score">${nonNegativeInt(run.score)}</span></div>`;
+      return `<div class="leader-row"><span class="leader-rank">${String(index + 1).padStart(2, '0')}</span><span class="leader-avatar">${run.mode === 'arcade' ? '⚡' : '✦'}</span><span class="leader-user"><b>${safeText(run.pilotName || guestPilotName)}</b><small>${safeText(date)} · ${safeText(run.mode)} flight</small></span><span class="leader-score">${nonNegativeInt(run.score)}</span></div>`;
     }).join('');
     els.leaderboardStatus.textContent = `${runs.length} session flight${runs.length === 1 ? '' : 's'}`;
   }
@@ -1298,6 +1334,70 @@
   }
   function clearAuthMessage() { els.authMessage.className = 'auth-message'; els.authMessage.textContent = ''; }
   function authMessage(message, type = 'info') { els.authMessage.textContent = message; els.authMessage.className = `auth-message visible ${type}`; }
+  function pilotNameMessage(message, type = 'info') {
+    els.pilotNameMessage.textContent = message;
+    els.pilotNameMessage.className = `auth-message visible ${type}`;
+  }
+  function openPilotNameDialog() {
+    const current = authUser ? (cloudProfile?.username || authUser.user_metadata?.username || '') : guestPilotName;
+    els.pilotNameInput.value = current === 'Guest Pilot' || current === 'New Pilot' ? '' : current;
+    els.pilotNameMessage.className = 'auth-message';
+    els.pilotNameMessage.textContent = '';
+    els.pilotNameSaveBtn.disabled = false;
+    els.pilotNameSaveBtn.innerHTML = 'Save pilot name <span>↗</span>';
+    els.pilotNamePrivacyNote.textContent = authUser
+      ? 'Your new name is stored in your public pilot profile and may appear on the global leaderboard.'
+      : 'Guest names are stored on this device only. Guest scores, coins and progression still reset after refresh.';
+    if (!els.pilotNameDialog.open) els.pilotNameDialog.showModal();
+    window.setTimeout(() => els.pilotNameInput.focus(), 60);
+  }
+  async function handlePilotNameSubmit(event) {
+    event.preventDefault();
+    const username = normalisePilotName(els.pilotNameInput.value);
+    if (!validPilotName(username)) {
+      pilotNameMessage('Use 3–16 letters, numbers or underscores. Spaces are not allowed.', 'error');
+      return;
+    }
+    els.pilotNameSaveBtn.disabled = true;
+    els.pilotNameSaveBtn.textContent = 'Saving name…';
+    try {
+      if (authUser && supabase) {
+        const { data, error } = await supabase.rpc('set_pilot_username', { p_username: username });
+        if (error) throw error;
+        cloudProfile = { ...(cloudProfile || {}), username: typeof data === 'string' ? data : username };
+        // Keep Auth metadata in sync too; the profiles table remains the authoritative public name.
+        const { error: metadataError } = await supabase.auth.updateUser({ data: { username } });
+        if (metadataError) console.warn('Pilot name saved to profile, but Auth metadata could not be updated:', metadataError);
+        await fetchCloudProfile();
+      } else {
+        guestPilotName = username;
+        try { window.localStorage.setItem(PILOT_NAME_STORAGE_KEY, username); }
+        catch { pilotNameMessage('This browser blocked local storage. The name will last only for this page session.', 'info'); }
+      }
+      updateProfileUI();
+      updateLeaderboard();
+      if (els.pilotNameMessage.classList.contains('info')) {
+        // Preserve the storage warning rather than replacing it with a success message.
+      } else {
+        pilotNameMessage(`Pilot name saved as ${username}.`, 'success');
+      }
+      showToast(`Pilot name updated: ${username}`, 'success', 2300);
+      window.setTimeout(() => { if (els.pilotNameDialog.open) els.pilotNameDialog.close(); }, 850);
+    } catch (error) {
+      console.warn('Pilot name update failed:', error);
+      const message = String(error?.message || 'Could not save the pilot name.');
+      if (error?.code === '23505' || /duplicate|unique|profiles_username_key/i.test(message)) {
+        pilotNameMessage('That pilot name is already taken. Choose a different one.', 'error');
+      } else if (/function.*set_pilot_username|set_pilot_username.*not found|schema cache/i.test(message)) {
+        pilotNameMessage('The database update is missing. Run the included supabase/set_pilot_username_patch.sql, then try again.', 'error');
+      } else {
+        pilotNameMessage(message, 'error');
+      }
+    } finally {
+      els.pilotNameSaveBtn.disabled = false;
+      els.pilotNameSaveBtn.innerHTML = 'Save pilot name <span>↗</span>';
+    }
+  }
   function openAuth(nextMode = 'signin') {
     setAuthMode(nextMode);
     if (!els.authDialog.open) els.authDialog.showModal();
@@ -1365,7 +1465,7 @@
   document.addEventListener('keydown', event => {
     const active = document.activeElement;
     const tag = active?.tagName;
-    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || els.authDialog.open || $('#achievementDialog')?.open || $('#codexDialog')?.open || $('#storeDialog')?.open) return;
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || els.authDialog.open || els.pilotNameDialog.open || $('#achievementDialog')?.open || $('#codexDialog')?.open || $('#storeDialog')?.open) return;
     // Do not steal Space/Arrow keys from unrelated buttons and links. The active game
     // area and start/resume button are the intentional keyboard play surfaces.
     const canDriveGame = !active || active === document.body || active === document.documentElement || active === els.startBtn;
@@ -1417,6 +1517,10 @@
   $('#codexSearch')?.addEventListener('input', renderCodex);
   $('#codexRarity')?.addEventListener('change', renderCodex);
   els.accountBtn.addEventListener('click', accountButtonAction);
+  els.editPilotNameBtn.addEventListener('click', openPilotNameDialog);
+  els.pilotNameForm.addEventListener('submit', handlePilotNameSubmit);
+  $('#closePilotNameBtn').addEventListener('click', () => els.pilotNameDialog.close());
+  els.pilotNameDialog.addEventListener('click', event => { if (event.target === els.pilotNameDialog) els.pilotNameDialog.close(); });
   els.profileAction.addEventListener('click', () => authUser ? accountButtonAction() : openAuth('signup'));
   $$('.auth-tab').forEach(button => button.addEventListener('click', () => setAuthMode(button.dataset.authMode)));
   $('#closeAuthBtn').addEventListener('click', () => els.authDialog.close());

@@ -1,8 +1,12 @@
-# Sky Hopper — Flight Club Expansion
+# Sky Hopper — Flight Club
 
 A free browser arcade game built with HTML, CSS, Canvas and JavaScript. It deploys to Cloudflare Pages as a static site; no build step or game server is required. Supabase supplies accounts and durable player data.
 
-## Feature patch
+## Current project
+
+Sky Hopper is an original browser arcade game maintained by **Anish Sandeep Bhargav (Dytalmc)**. The public site includes a playable game plus a first-party guide, FAQ, About page, Contact page, privacy notice and licence page. The game works without a build step.
+
+## Features
 
 - **Achievement notices never cover the play canvas.** New milestones appear in a dismissible side-rail notice panel.
 - **Classic mode:** one collision ends the run; gates get faster gradually while the classic gap remains familiar. Classic awards **no coins**.
@@ -17,17 +21,17 @@ A free browser arcade game built with HTML, CSS, Canvas and JavaScript. It deplo
 
 ## Apply the patch
 
-1. Keep a backup of your current project.
-2. Extract the patch ZIP into the project root, overwriting the included files. Do not remove your existing `styles.css`, `favicon.svg` or `supabase-config.js`.
-3. Keep `index.html`, `app.js`, `styles.css`, `expansion.css` and `supabase-config.js` at the root of the repository.
-4. Follow `SUPABASE_SETUP.md` for the correct SQL path.
-5. Commit the changes to GitHub; Cloudflare Pages should publish them automatically.
+1. Back up the current repository.
+2. Extract the project ZIP and copy its contents into the repository root, preserving `supabase-config.js` and its public key unless you intend to change the backend.
+3. Keep `index.html`, `app.js`, `styles.css`, `expansion.css`, `content.css` and `supabase-config.js` at the repository root.
+4. Follow `SUPABASE_SETUP.md`. Existing databases need the add-on SQL for the new username RPC.
+5. Test the game and all pages locally, then commit and deploy. Recheck the live site on desktop and mobile.
 
 ## Supabase SQL — choose only one installation path
 
 - **Brand-new database:** run the full root `supabase.sql` (or identical `supabase/schema.sql`) once in Supabase SQL Editor.
 - **Existing Sky Hopper database with the previous master schema:** run only `supabase/store_cosmetics_coins_patch.sql`. It adds cosmetic catalogues and ownership/loadout tables and updates Arcade coin rewards and long-term achievement thresholds without dropping player records.
-- Do not run the full master script on a live existing database as a substitute for the migration. Back up first, run the migration once, and check every SQL Editor result for errors.
+- If the updated store migration was already applied before the custom-name RPC was added, run only `supabase/set_pilot_username_patch.sql`. Do not run the full master script on a live existing database as a substitute for the migration. Back up first, use the applicable migration once, and check every SQL Editor result for errors.
 
 ## Files
 
@@ -39,7 +43,12 @@ A free browser arcade game built with HTML, CSS, Canvas and JavaScript. It deplo
 - `supabase.sql` — consolidated single-file fresh-install database script.
 - `supabase/store_cosmetics_coins_patch.sql` — incremental migration for an existing installation.
 - `SUPABASE_SETUP.md` — configuration and test guide.
-- `privacy.html`, `about.html` — updated project and privacy descriptions.
+- `ADSENSE_REVIEW_CHECKLIST.md` — deployment, privacy/consent and AdSense re-review checklist.
+- `guide.html`, `faq.html` — original gameplay walkthrough and player troubleshooting.
+- `contact.html`, `license.html`, `COPYRIGHT.md` — reporting route, licence overview and copyright notice.
+- `content.css` — shared accessible styling for editorial pages.
+- `privacy.html`, `about.html` — project and privacy descriptions.
+- `supabase/set_pilot_username_patch.sql` — secure RPC migration for custom cloud pilot names.
 
 ## Cloud-only persistence and security
 

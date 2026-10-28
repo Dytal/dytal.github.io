@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Anish Sandeep Bhargav (Dytalmc). Licensed under the MIT License; see LICENSE.
 /*
   Sky Hopper backend configuration.
   Copy your Supabase Project URL and publishable key from Project Settings > API Keys.
